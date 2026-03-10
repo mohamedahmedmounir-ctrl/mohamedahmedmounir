@@ -1,0 +1,2648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Mohamed Ahmed — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ══ RESET & TOKENS ══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0c14;
+  --bg2:#0f1120;
+  --surf:#141729;
+  --surf2:#1a1f35;
+  --b1:#222540;
+  --b2:#2e3358;
+  --t1:#eef0ff;
+  --t2:#8b90b8;
+  --t3:#484d72;
+  --gold:#e8b86d;
+  --gold2:#f5d08a;
+  --teal:#2dd4bf;
+  --rose:#f87171;
+  --gdim:rgba(232,184,109,.1);
+  --gbdr:rgba(232,184,109,.25);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --tr:.22s cubic-bezier(.4,0,.2,1);
+  --r:10px;--rl:18px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.65;transition:background .4s}
+body.has-bg{background-attachment:fixed;background-size:cover;background-position:center}
+body.has-bg::before{content:'';position:fixed;inset:0;background:rgba(8,10,20,.82);backdrop-filter:blur(1px);z-index:-1;pointer-events:none}
+::selection{background:var(--gold);color:#000}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+a{color:inherit;text-decoration:none}
+img{display:block}
+button{font-family:var(--sans);cursor:pointer;border:none;background:none}
+input,textarea,select{font-family:var(--sans)}
+/* ══ LAYOUT ═══════════════════════════════════════════════════════ */
+.wrap{max-width:1100px;margin:0 auto;padding:0 2rem}
+.section{padding:5.5rem 0}
+.section-alt{background:rgba(15,17,32,.7);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1)}
+/* ══ TYPE HELPERS ════════════════════════════════════════════════ */
+.eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.55rem}
+.heading{font-family:var(--serif);font-size:clamp(1.9rem,3.8vw,2.8rem);line-height:1.08;letter-spacing:-.02em;margin-bottom:.6rem}
+.subtext{font-size:.94rem;color:var(--t2);max-width:480px;line-height:1.85;margin-bottom:3rem}
+/* ══ BUTTONS ════════════════════════════════════════════════════ */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.62rem 1.45rem;border-radius:9px;font-size:.85rem;font-weight:600;transition:var(--tr);cursor:pointer;font-family:var(--sans);border:none;text-decoration:none}
+.btn-gold{background:var(--gold);color:#0a0c14}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 28px rgba(232,184,109,.35)}
+.btn-outline{background:transparent;border:1px solid var(--b2);color:var(--t2)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);background:var(--gdim)}
+.btn-sm{padding:.45rem 1rem;font-size:.78rem}
+/* ══ CARDS ══════════════════════════════════════════════════════ */
+.card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);transition:border-color var(--tr)}
+.card:hover{border-color:var(--b2)}
+/* ══ REVEAL ═════════════════════════════════════════════════════ */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .65s,transform .65s}
+.rv.in{opacity:1;transform:none}
+/* ══ NAVBAR ═════════════════════════════════════════════════════ */
+#nav{position:fixed;top:0;left:0;right:0;height:62px;z-index:800;display:flex;align-items:center;transition:all var(--tr)}
+#nav.scrolled{background:rgba(10,12,20,.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--b1)}
+.nav-inner{display:flex;align-items:center;gap:.5rem;width:100%;max-width:1100px;margin:0 auto;padding:0 1rem}
+.nav-logo{font-family:var(--serif);font-style:italic;font-size:1.18rem;display:flex;align-items:center;gap:.55rem}
+.nav-logo-badge{font-style:normal;font-family:var(--sans);font-size:.64rem;font-weight:700;background:var(--gdim);border:1px solid var(--gbdr);color:var(--gold);padding:.15rem .6rem;border-radius:99px;letter-spacing:.06em}
+.nav-links{display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;flex:1;min-width:0}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{font-size:.8rem;font-weight:500;color:var(--t2);padding:.42rem .72rem;border-radius:8px;transition:var(--tr);position:relative;white-space:nowrap;flex-shrink:0}
+.nav-links a:hover{color:var(--t1)}
+.nav-links a.active{color:var(--gold)}
+.nav-links a.active::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:16px;height:2px;background:var(--gold);border-radius:2px}
+.nav-r{display:flex;align-items:center;gap:.38rem;flex-shrink:0}
+.nav-icon-btn{width:36px;height:36px;border-radius:9px;border:1px solid var(--b1);background:var(--surf);display:flex;align-items:center;justify-content:center;color:var(--t2);font-size:.9rem;transition:var(--tr);cursor:pointer}
+.nav-icon-btn:hover{border-color:var(--gold);color:var(--gold)}
+/* ══ HERO ═══════════════════════════════════════════════════════ */
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:62px;position:relative;overflow:hidden}
+.hero-mesh{position:absolute;inset:0;background:
+  radial-gradient(ellipse 60% 80% at 70% 50%,rgba(232,184,109,.06),transparent),
+  radial-gradient(ellipse 40% 60% at 10% 80%,rgba(45,212,191,.04),transparent),
+  linear-gradient(135deg,rgba(232,184,109,.03) 0%,transparent 60%);
+  pointer-events:none}
+.hero-grid{position:absolute;inset:0;
+  background-image:linear-gradient(var(--b1) 1px,transparent 1px),linear-gradient(90deg,var(--b1) 1px,transparent 1px);
+  background-size:64px 64px;opacity:.22;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 0,black 30%,transparent 100%)}
+.hero-content{position:relative;z-index:1;max-width:780px}
+.hero-pill{display:inline-flex;align-items:center;gap:.6rem;background:var(--gdim);border:1px solid var(--gbdr);color:var(--gold);padding:.32rem 1rem;border-radius:99px;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2rem;animation:fadeUp .6s .1s both}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pls 2.2s infinite;flex-shrink:0}
+.hero-name{font-family:var(--serif);font-size:clamp(3.8rem,9.5vw,7rem);line-height:.9;letter-spacing:-.045em;margin-bottom:1rem;animation:fadeUp .6s .2s both}
+.hero-name span{display:block}
+.hero-name em{font-style:italic;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-role{font-size:clamp(.95rem,2vw,1.12rem);color:var(--t2);font-weight:300;letter-spacing:.01em;margin-bottom:1.1rem;animation:fadeUp .6s .3s both}
+.hero-desc{font-size:.92rem;color:var(--t3);max-width:450px;line-height:1.9;margin-bottom:2.6rem;animation:fadeUp .6s .4s both}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;animation:fadeUp .6s .5s both}
+.hero-scroll{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.45rem;color:var(--t3);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;animation:fadeUp .6s .9s both}
+.hero-scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent)}
+/* ══ ABOUT ══════════════════════════════════════════════════════ */
+.about-grid{display:grid;grid-template-columns:300px 1fr;gap:5rem;align-items:start}
+.about-photo-wrap{display:flex;flex-direction:column;align-items:center;gap:1.25rem}
+.profile-ring{width:200px;height:200px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--gold),var(--gold2),transparent);flex-shrink:0}
+.profile-circle{width:100%;height:100%;border-radius:50%;overflow:hidden;background:var(--surf2);display:flex;align-items:center;justify-content:center;font-size:4rem;border:2px solid var(--bg)}
+.profile-circle img{width:100%;height:100%;object-fit:cover}
+.about-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:1.1rem;width:100%}
+.about-stat{display:flex;align-items:center;gap:.7rem;padding:.5rem 0;border-bottom:1px solid var(--b1)}
+.about-stat:last-child{border:none}
+.stat-ico{font-size:1rem;width:24px;text-align:center}
+.stat-lbl{font-size:.72rem;color:var(--t3);font-weight:600;margin-bottom:.05rem}
+.stat-val{font-size:.83rem;font-weight:600}
+.bio p{font-size:.93rem;color:var(--t2);line-height:1.88;margin-bottom:.9rem}
+.focus-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.4rem}
+.focus-tag{padding:.3rem .85rem;border-radius:7px;font-size:.76rem;font-weight:500;background:var(--surf2);border:1px solid var(--b1);color:var(--t2);transition:var(--tr);cursor:default}
+.focus-tag:hover{border-color:var(--gbdr);color:var(--gold);background:var(--gdim)}
+/* ══ SKILLS ═════════════════════════════════════════════════════ */
+.skill-cats{display:flex;flex-direction:column;gap:2.5rem}
+.skill-cat-head{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.skill-cat-lbl{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);white-space:nowrap}
+.skill-cat-line{flex:1;height:1px;background:var(--b1)}
+.skill-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.skill-chip{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .95rem;border-radius:8px;background:var(--surf);border:1px solid var(--b1);font-size:.81rem;font-weight:500;color:var(--t2);transition:var(--tr)}
+.skill-chip:hover{border-color:var(--gbdr);color:var(--gold);background:var(--gdim)}
+.skill-bar{width:28px;height:2.5px;border-radius:99px;background:var(--b2);overflow:hidden}
+.skill-fill{height:100%;background:var(--gold);border-radius:99px}
+/* ══ PROJECTS ═══════════════════════════════════════════════════ */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem}
+.proj-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);overflow:hidden;cursor:pointer;transition:all var(--tr)}
+.proj-card:hover{border-color:var(--b2);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.proj-card:hover .proj-arrow{opacity:1;transform:translate(2px,-2px)}
+.proj-thumb{height:180px;background:var(--surf2);display:flex;align-items:center;justify-content:center;font-size:3.5rem;border-bottom:1px solid var(--b1);overflow:hidden;position:relative}
+.proj-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.proj-card:hover .proj-thumb img{transform:scale(1.04)}
+.proj-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--surf),transparent 60%)}
+.proj-body{padding:1.4rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.8rem}
+.proj-tag{font-size:.65rem;font-weight:700;padding:.18rem .55rem;border-radius:4px;background:rgba(232,184,109,.1);color:var(--gold2);border:1px solid rgba(232,184,109,.2)}
+.proj-title{font-family:var(--serif);font-size:1.08rem;margin-bottom:.35rem;line-height:1.25}
+.proj-desc{font-size:.81rem;color:var(--t3);line-height:1.65;margin-bottom:1.1rem}
+.proj-foot{display:flex;align-items:center;justify-content:space-between}
+.proj-links{display:flex;gap:.4rem}
+.proj-lnk{font-size:.72rem;font-weight:600;padding:.28rem .7rem;border-radius:6px;transition:var(--tr)}
+.proj-gh{border:1px solid var(--b1);color:var(--t3)}.proj-gh:hover{border-color:var(--b2);color:var(--t1)}
+.proj-live{background:var(--gdim);border:1px solid var(--gbdr);color:var(--gold)}.proj-live:hover{background:var(--gold);color:#000}
+.proj-arrow{width:26px;height:26px;border:1px solid var(--b1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--t3);opacity:0;transition:all var(--tr)}
+/* ══ TIMELINE ═══════════════════════════════════════════════════ */
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--gold) 0%,var(--b1) 80%)}
+.tl-item{position:relative;padding:0 0 2.5rem 1.75rem;opacity:0;transform:translateX(-14px);transition:opacity .55s,transform .55s}
+.tl-item.in{opacity:1;transform:none}
+.tl-dot{position:absolute;left:-2.25rem;top:6px;width:9px;height:9px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);box-shadow:0 0 0 3px var(--gdim)}
+.tl-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.3rem}
+.tl-role{font-weight:700;font-size:.94rem;color:var(--t1)}
+.tl-period{font-size:.7rem;color:var(--t3);background:var(--surf2);border:1px solid var(--b1);padding:.2rem .65rem;border-radius:5px}
+.tl-org{font-size:.82rem;color:var(--gold);font-weight:600;margin-bottom:.4rem}
+.tl-desc{font-size:.84rem;color:var(--t2);line-height:1.72}
+/* ══ CERTIFICATIONS ════════════════════════════════════════════ */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.cert-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:1.3rem;cursor:pointer;transition:all var(--tr)}
+.cert-card:hover{border-color:var(--gbdr);background:var(--gdim);transform:translateY(-2px)}
+.cert-ico{font-size:1.65rem;margin-bottom:.7rem}
+.cert-title{font-weight:700;font-size:.88rem;line-height:1.3;margin-bottom:.2rem}
+.cert-iss{font-size:.74rem;color:var(--gold);font-weight:600;margin-bottom:.45rem}
+.cert-date{font-size:.7rem;color:var(--t3);border-top:1px solid var(--b1);padding-top:.55rem;margin-top:.55rem}
+/* ══ AWARDS ═════════════════════════════════════════════════════ */
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem}
+.award-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:1.5rem;transition:var(--tr)}
+.award-card:hover{border-color:var(--gbdr)}
+.award-badge{width:44px;height:44px;border-radius:10px;background:var(--gdim);border:1px solid var(--gbdr);display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-bottom:1rem}
+.award-title{font-weight:700;font-size:.91rem;margin-bottom:.2rem}
+.award-org{font-size:.76rem;color:var(--gold);font-weight:600;margin-bottom:.5rem}
+.award-desc{font-size:.8rem;color:var(--t3);line-height:1.65}
+.award-year{font-size:.7rem;color:var(--t3);font-weight:700;margin-top:.7rem}
+/* ══ RESEARCH ═══════════════════════════════════════════════════ */
+.research-list{display:flex;flex-direction:column;gap:1rem}
+.research-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:1.5rem;display:grid;grid-template-columns:48px 1fr;gap:1.25rem;align-items:start;transition:var(--tr)}
+.research-card:hover{border-color:var(--b2)}
+.research-num{font-family:var(--serif);font-size:2.2rem;font-style:italic;color:var(--b2);line-height:1}
+.research-title{font-weight:700;font-size:.9rem;margin-bottom:.35rem}
+.research-abs{font-size:.82rem;color:var(--t2);line-height:1.72;margin-bottom:.65rem}
+/* ══ HOBBIES ════════════════════════════════════════════════════ */
+.hobbies-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.75rem}
+.hobby-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:1.2rem;text-align:center;transition:all var(--tr)}
+.hobby-card:hover{border-color:var(--gbdr);background:var(--gdim);transform:translateY(-2px)}
+.hobby-ico{font-size:2rem;margin-bottom:.45rem}
+.hobby-name{font-size:.79rem;font-weight:600;color:var(--t2)}
+/* ══ CONTACT ════════════════════════════════════════════════════ */
+.contact-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start}
+.contact-cards{display:flex;flex-direction:column;gap:.6rem}
+.contact-card{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);transition:var(--tr);text-decoration:none}
+.contact-card:hover{border-color:var(--gbdr)}
+.cc-icon{font-size:1.1rem;width:34px;text-align:center;flex-shrink:0}
+.cc-lbl{font-size:.64rem;color:var(--t3);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.cc-val{font-size:.84rem;font-weight:600}
+.contact-form{display:flex;flex-direction:column;gap:.9rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.form-field{display:flex;flex-direction:column;gap:.32rem}
+.form-field label{font-size:.7rem;font-weight:700;color:var(--t2);letter-spacing:.05em;text-transform:uppercase}
+.form-field input,.form-field textarea{background:var(--surf);border:1px solid var(--b1);color:var(--t1);padding:.68rem .95rem;border-radius:9px;font-family:var(--sans);font-size:.86rem;outline:none;transition:var(--tr);resize:vertical;width:100%}
+.form-field input:focus,.form-field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gdim)}
+.form-success{background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.2);border-radius:9px;padding:.9rem 1.1rem;color:var(--teal);font-size:.83rem;font-weight:500;display:none}
+/* ══ FOOTER ═════════════════════════════════════════════════════ */
+footer{border-top:1px solid var(--b1);padding:2rem 0}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.25rem}
+.foot-brand{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--t2)}
+.foot-nav a{font-size:.78rem;color:var(--t3);margin-right:1.25rem;transition:var(--tr)}
+.foot-nav a:hover{color:var(--t1)}
+.foot-social{display:flex;gap:.45rem}
+.foot-soc-btn{width:32px;height:32px;border-radius:7px;border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--t3);transition:var(--tr)}
+.foot-soc-btn:hover{border-color:var(--gbdr);color:var(--gold)}
+.foot-copy{font-size:.72rem;color:var(--t3);width:100%}
+/* ══ PROJECT DETAIL ════════════════════════════════════════════ */
+#projDetail{display:none;position:fixed;inset:0;z-index:700;background:var(--bg);overflow-y:auto}
+#projDetail.open{display:block}
+.pd-topbar{position:sticky;top:0;height:62px;background:rgba(10,12,20,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--b1);display:flex;align-items:center;padding:0 2rem;z-index:5}
+.pd-back{display:flex;align-items:center;justify-content:center;font-size:1.4rem;width:40px;height:40px;background:var(--gold);color:#09090f;border:none;border-radius:50%;margin-top:12px;cursor:pointer}
+.pd-back:hover{background:var(--gold2);transform:translateX(-2px)}
+.pd-back:active{transform:scale(.96)}
+.pd-hero{height:360px;background:var(--surf);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:6.5rem;overflow:hidden;position:relative}
+.pd-hero img{width:100%;height:100%;object-fit:cover;opacity:.65}
+.pd-hero-ovl{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,transparent 60%)}
+.pd-inner{max-width:720px;margin:0 auto;padding:3rem 2rem}
+/* ══ CERT MODAL ════════════════════════════════════════════════ */
+.overlay{position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.82);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .22s}
+.overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--rl);max-width:460px;width:100%;padding:2rem;position:relative;transform:scale(.95) translateY(12px);transition:transform .24s;max-height:90vh;overflow-y:auto}
+.overlay.open .modal{transform:none}
+.modal-x{position:absolute;top:1rem;right:1rem;width:30px;height:30px;border-radius:7px;background:var(--surf);border:1px solid var(--b1);color:var(--t2);display:flex;align-items:center;justify-content:center;font-size:.82rem;cursor:pointer;transition:var(--tr)}
+.modal-x:hover{color:var(--t1)}
+.modal-img{height:160px;background:var(--surf);border:1px solid var(--b1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;margin-bottom:1.25rem;overflow:hidden}
+.modal-img img{width:100%;height:100%;object-fit:cover}
+/* ══ ADMIN DASHBOARD ════════════════════════════════════════════ */
+#adminOverlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.9);backdrop-filter:blur(20px);align-items:center;justify-content:center}
+#adminOverlay.open{display:flex}
+/* Login card */
+.login-card{background:var(--bg2);border:1px solid var(--b1);border-radius:20px;padding:2.5rem;width:100%;max-width:380px;animation:fadeUp .4s both}
+.login-logo{font-family:var(--serif);font-size:1.5rem;font-style:italic;color:var(--gold);margin-bottom:.25rem}
+.login-sub{font-size:.8rem;color:var(--t3);margin-bottom:2rem}
+.login-field{margin-bottom:1rem}
+.login-field label{display:block;font-size:.7rem;font-weight:700;color:var(--t2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.4rem}
+.login-field input{width:100%;background:var(--surf);border:1px solid var(--b1);color:var(--t1);padding:.72rem 1rem;border-radius:9px;font-family:var(--sans);font-size:.9rem;outline:none;transition:var(--tr)}
+.login-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gdim)}
+.login-err{font-size:.78rem;color:var(--rose);margin-top:.4rem;display:none}
+/* Admin shell */
+#adminShell{display:none;position:fixed;inset:0;z-index:1001;background:var(--bg);flex-direction:column}
+#adminShell.open{display:flex}
+.adm-header{height:54px;background:var(--bg2);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;flex-shrink:0}
+.adm-logo{display:flex;align-items:center;gap:.65rem}
+.adm-logo-icon{width:28px;height:28px;border-radius:7px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#000}
+.adm-logo-name{font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--t1)}
+.adm-logo-badge{font-size:.62rem;font-style:normal;font-family:var(--sans);background:var(--gdim);border:1px solid var(--gbdr);color:var(--gold);padding:.1rem .5rem;border-radius:99px;font-weight:700;letter-spacing:.05em}
+.adm-hdr-r{display:flex;align-items:center;gap:.5rem}
+.adm-body{flex:1;display:flex;overflow:hidden}
+/* Sidebar */
+.adm-sidebar{width:220px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--b1);overflow-y:auto;padding:.75rem .5rem;display:flex;flex-direction:column;gap:.08rem}
+.adm-grp{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);padding:.7rem .75rem .25rem;margin-top:.3rem}
+.adm-item{display:flex;align-items:center;gap:.65rem;padding:.58rem .75rem;border-radius:8px;font-size:.8rem;font-weight:500;color:var(--t2);transition:var(--tr);cursor:pointer;border:1px solid transparent}
+.adm-item:hover{background:var(--surf2);color:var(--t1)}
+.adm-item.active{background:var(--gdim);color:var(--gold);border-color:var(--gbdr)}
+.adm-item-icon{font-size:.9rem;width:18px;text-align:center;flex-shrink:0}
+/* Main area */
+.adm-main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.adm-bar{padding:1.1rem 1.75rem;border-bottom:1px solid var(--b1);flex-shrink:0;display:flex;align-items:center;justify-content:space-between}
+.adm-bar-title{font-family:var(--serif);font-size:1.35rem}
+.adm-bar-sub{font-size:.74rem;color:var(--t3)}
+.adm-scroll{flex:1;overflow-y:auto;padding:1.75rem}
+/* Panels */
+.adm-panel{display:none}
+.adm-panel.active{display:block}
+/* Cards inside admin */
+.acard{background:var(--surf);border:1px solid var(--b1);border-radius:16px;padding:1.5rem;margin-bottom:1.2rem}
+.acard-title{font-weight:700;font-size:.88rem;padding-bottom:.9rem;margin-bottom:1.1rem;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;color:var(--t1)}
+.acard-hint{font-size:.72rem;color:var(--t3);font-weight:400}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.a-full{grid-column:1/-1}
+.afield{display:flex;flex-direction:column;gap:.3rem}
+.afield label{font-size:.68rem;font-weight:700;color:var(--t3);letter-spacing:.06em;text-transform:uppercase}
+.afield input,.afield textarea,.afield select{background:var(--bg);border:1px solid var(--b1);color:var(--t1);padding:.6rem .88rem;border-radius:8px;font-family:var(--sans);font-size:.83rem;outline:none;transition:var(--tr);resize:vertical;width:100%}
+.afield input:focus,.afield textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gdim)}
+/* Stats */
+.adm-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-bottom:1.3rem}
+.stat-card{background:var(--surf);border:1px solid var(--b1);border-radius:12px;padding:1rem 1.1rem}
+.stat-num{font-family:var(--serif);font-size:1.9rem;color:var(--gold);line-height:1;margin-bottom:.15rem}
+.stat-lbl{font-size:.65rem;color:var(--t3);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+/* Table */
+.atable{width:100%;border-collapse:collapse;font-size:.79rem}
+.atable th{font-size:.63rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);padding:.52rem .85rem;border-bottom:1px solid var(--b1);text-align:left}
+.atable td{padding:.65rem .85rem;border-bottom:1px solid var(--b1);color:var(--t2);vertical-align:middle}
+.atable tr:last-child td{border:none}
+.atable tr:hover td{background:var(--surf2)}
+.atable-actions{display:flex;gap:.35rem}
+.abtn-edit{padding:.22rem .58rem;border-radius:4px;font-size:.7rem;font-weight:700;background:rgba(96,165,250,.1);color:#60a5fa;border:1px solid rgba(96,165,250,.2);cursor:pointer;transition:var(--tr);font-family:var(--sans)}
+.abtn-edit:hover{background:#60a5fa;color:#000}
+.abtn-del{padding:.22rem .58rem;border-radius:4px;font-size:.7rem;font-weight:700;background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.2);cursor:pointer;transition:var(--tr);font-family:var(--sans)}
+.abtn-del:hover{background:#f87171;color:#fff}
+.asave{background:var(--gold);color:#0a0c14;border:none;padding:.58rem 1.3rem;border-radius:8px;font-size:.83rem;font-weight:700;cursor:pointer;transition:var(--tr);font-family:var(--sans)}
+.asave:hover{background:var(--gold2);box-shadow:0 4px 16px rgba(232,184,109,.3)}
+.a-cancel{background:transparent;border:1px solid var(--b2);color:var(--t2);padding:.58rem 1rem;border-radius:8px;font-size:.83rem;font-weight:600;cursor:pointer;transition:var(--tr);font-family:var(--sans)}
+.a-cancel:hover{border-color:var(--b2);color:var(--t1)}
+/* Upload zones */
+.upload-zone{position:relative;border:2px dashed var(--b1);border-radius:12px;padding:2.5rem;text-align:center;cursor:pointer;transition:var(--tr);overflow:hidden}
+.upload-zone:hover{border-color:var(--gold);background:var(--gdim)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.uz-icon{font-size:2.2rem;margin-bottom:.6rem}
+.uz-title{font-size:.86rem;color:var(--t2);font-weight:600}
+.uz-hint{font-size:.72rem;color:var(--t3);margin-top:.25rem}
+/* Image grid */
+.img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:.6rem;margin-top:.9rem}
+.img-thumb{position:relative;aspect-ratio:1;border-radius:9px;overflow:hidden;border:2px solid var(--b1);cursor:pointer;transition:var(--tr)}
+.img-thumb:hover{border-color:var(--gold)}
+.img-thumb img{width:100%;height:100%;object-fit:cover}
+.img-thumb-copy{position:absolute;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--gold);opacity:0;transition:var(--tr)}
+.img-thumb:hover .img-thumb-copy{opacity:1}
+/* Profile upload special */
+.profile-upload-wrap{display:flex;flex-direction:column;align-items:center;gap:1.25rem}
+.prof-ring-preview{width:130px;height:130px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--gold),var(--gold2),transparent)}
+.prof-ring-inner{width:100%;height:100%;border-radius:50%;overflow:hidden;background:var(--surf2);display:flex;align-items:center;justify-content:center;font-size:3rem;border:2px solid var(--bg)}
+.prof-ring-inner img{width:100%;height:100%;object-fit:cover}
+.prof-upload-btn{position:relative;overflow:hidden}
+.prof-upload-btn input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+/* Tag input */
+.tag-input-wrap{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem;background:var(--bg);border:1px solid var(--b1);border-radius:8px;min-height:42px;cursor:text;transition:var(--tr)}
+.tag-input-wrap:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px var(--gdim)}
+.tag-pill{display:inline-flex;align-items:center;gap:.3rem;padding:.15rem .55rem;background:var(--gdim);border:1px solid var(--gbdr);color:var(--gold);border-radius:4px;font-size:.72rem;font-weight:700}
+.tag-pill button{background:none;border:none;color:inherit;cursor:pointer;padding:0;opacity:.7;font-size:.72rem}
+.tag-pill button:hover{opacity:1}
+.tag-bare-input{border:none;outline:none;background:transparent;font-family:var(--sans);font-size:.82rem;color:var(--t1);min-width:70px;flex:1}
+/* Toast */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;background:var(--surf);border:1px solid var(--b1);border-radius:11px;padding:.65rem 1.1rem;font-size:.8rem;font-weight:600;display:flex;align-items:center;gap:.5rem;box-shadow:0 6px 30px rgba(0,0,0,.6);transform:translateY(10px);opacity:0;transition:var(--tr);pointer-events:none;max-width:280px}
+.toast.show{transform:none;opacity:1}
+.toast.ok{border-color:rgba(45,212,191,.3);color:var(--teal)}
+.toast.err{border-color:rgba(248,113,113,.3);color:var(--rose)}
+/* ══ ANIMATIONS ════════════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pls{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.65)}}
+/* ══ RESPONSIVE ════════════════════════════════════════════════ */
+@media(max-width:900px){
+  .about-grid,.contact-wrap{grid-template-columns:1fr}
+  .about-photo-wrap{flex-direction:row;align-items:flex-start}
+  .profile-ring{width:140px;height:140px;flex-shrink:0}
+  .adm-stats{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:640px){
+  .section{padding:4rem 0}
+  .projects-grid{grid-template-columns:1fr}
+  .form-row,.agrid{grid-template-columns:1fr}
+  .adm-stats{grid-template-columns:1fr 1fr}
+}
+
+/* ── EDUCATION ─────────────────────────────── */
+.edu-grid{display:flex;flex-direction:column;gap:1.25rem}
+.edu-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);padding:1.6rem 1.8rem;display:grid;grid-template-columns:80px 1fr;gap:1.4rem;align-items:start;transition:border-color var(--tr)}
+.edu-card:hover{border-color:var(--b2)}
+.edu-logo{width:80px;height:80px;border-radius:14px;background:var(--surf2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:2.2rem;overflow:hidden;flex-shrink:0}
+.edu-logo img{width:100%;height:100%;object-fit:contain;padding:8px}
+.edu-school{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:.15rem}
+.edu-degree{font-size:.86rem;color:var(--gold);font-weight:600;margin-bottom:.2rem}
+.edu-field{font-size:.8rem;color:var(--t2);margin-bottom:.5rem}
+.edu-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.edu-period{font-size:.7rem;color:var(--t3);background:var(--surf2);border:1px solid var(--b1);padding:.18rem .6rem;border-radius:5px}
+.edu-status{font-size:.63rem;font-weight:700;padding:.2rem .62rem;border-radius:99px;letter-spacing:.04em}
+.edu-status.current{background:rgba(45,212,191,.12);color:#2dd4bf;border:1px solid rgba(45,212,191,.3)}
+.edu-status.completed{background:var(--gdim);color:var(--gold);border:1px solid var(--gbdr)}
+@media(max-width:640px){.edu-card{grid-template-columns:52px 1fr;gap:.85rem;padding:1.1rem}.edu-logo{width:52px;height:52px}}
+/* ── VOLUNTEERING ───────────────────────────── */
+.vol-grid{display:flex;flex-direction:column;gap:.9rem}
+.vol-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:1.25rem 1.4rem;display:grid;grid-template-columns:44px 1fr;gap:1rem;align-items:start;transition:border-color var(--tr)}
+.vol-card:hover{border-color:var(--gbdr)}
+.vol-icon{width:44px;height:44px;border-radius:10px;background:var(--gdim);border:1px solid var(--gbdr);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.vol-role{font-weight:700;font-size:.9rem;margin-bottom:.1rem}
+.vol-org{font-size:.78rem;color:var(--gold);font-weight:600;margin-bottom:.28rem}
+.vol-period{font-size:.68rem;color:var(--t3);margin-bottom:.38rem}
+.vol-desc{font-size:.82rem;color:var(--t2);line-height:1.68}
+/* ── SECTION PHOTO BANNER ───────────────────── */
+.sec-photo{width:100%;height:220px;border-radius:var(--rl);overflow:hidden;margin-bottom:2rem;position:relative;border:1px solid var(--b1)}
+.sec-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.sec-photo-ovl{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,12,20,.65))}
+@media(max-width:640px){.sec-photo{height:160px}}
+/* ── EXPERIENCE ENTRY PHOTO ─────────────────── */
+.tl-img{width:100%;max-height:180px;border-radius:10px;overflow:hidden;margin-top:.85rem;border:1px solid var(--b1)}
+.tl-img img{width:100%;height:100%;object-fit:cover;display:block}
+/* ── MESSAGES ───────────────────────────────── */
+.msg-card{background:var(--surf);border:1px solid var(--b1);border-radius:12px;padding:1.1rem;margin-bottom:.7rem}
+.msg-card.unread{border-color:var(--gbdr)}
+.msg-from{font-weight:700;font-size:.87rem;display:flex;align-items:center;gap:.4rem}
+.msg-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.msg-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem}
+.msg-time{font-size:.67rem;color:var(--t3)}
+.msg-email{font-size:.72rem;color:var(--t3);margin-bottom:.3rem}
+.msg-subject{font-size:.79rem;color:var(--gold);font-weight:600;margin-bottom:.35rem}
+.msg-body{font-size:.82rem;color:var(--t2);line-height:1.65}
+.msg-acts{display:flex;gap:.38rem;margin-top:.7rem;flex-wrap:wrap}
+.adm-badge{background:var(--rose);color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .38rem;border-radius:99px;min-width:17px;text-align:center;margin-left:.3rem;vertical-align:middle}
+/* ── FONT & COLOR ───────────────────────────── */
+.color-swatch{width:30px;height:30px;border-radius:7px;border:2px solid var(--b2);cursor:pointer;flex-shrink:0;transition:transform .15s}
+.color-swatch:hover{transform:scale(1.15)}
+.font-opt{padding:.5rem .9rem;border-radius:8px;border:1px solid var(--b1);cursor:pointer;font-size:.82rem;color:var(--t2);background:var(--surf);transition:var(--tr)}
+.font-opt:hover,.font-opt.active{border-color:var(--gbdr);color:var(--gold);background:var(--gdim)}
+
+/* ── PER-SECTION BACKGROUNDS ── */
+.section[data-bg]{position:relative;background-attachment:fixed}
+.section[data-bg]::before{content:'';position:absolute;inset:0;background-image:var(--sec-bg-img);background-size:cover;background-position:center;opacity:var(--sec-bg-opacity,0.18);pointer-events:none;z-index:0}
+.section[data-bg] .wrap{position:relative;z-index:1}
+.section-alt[data-bg]::before{background-color:transparent}
+.sec-bg-card{background:var(--surf);border:1px solid var(--b1);border-radius:11px;padding:.85rem 1rem;display:grid;grid-template-columns:90px 1fr auto;align-items:center;gap:.9rem}
+.sec-bg-thumb{width:90px;height:58px;border-radius:7px;overflow:hidden;background:var(--surf2);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--t3);flex-shrink:0}
+.sec-bg-thumb img{width:100%;height:100%;object-fit:cover}
+.sec-bg-label{font-size:.86rem;font-weight:600;margin-bottom:.22rem}
+.sec-bg-opacity{display:flex;align-items:center;gap:.5rem;margin-top:.4rem}
+.sec-bg-opacity input[type=range]{flex:1;accent-color:var(--gold)}
+.sec-bg-opacity span{font-size:.7rem;color:var(--t3);min-width:28px}
+
+/* ── BACK BUTTON ───────────────────────────────────────────── */
+.pd-back-float{
+  position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);
+  z-index:720;
+  background:var(--gold);color:#09090f;
+  border:none;border-radius:50px;
+  padding:.78rem 2.2rem;
+  font-size:.92rem;font-weight:800;
+  box-shadow:0 6px 24px rgba(232,184,109,.5),0 2px 8px rgba(0,0,0,.45);
+  cursor:pointer;white-space:nowrap;
+  display:none;align-items:center;gap:.5rem;
+  transition:transform .15s,background .15s;
+}
+.pd-back-float:active{transform:translateX(-50%) scale(.96)}
+#projDetail.open .pd-back-float{display:flex}
+
+/* ── ADMIN MOBILE ──────────────────────────────────────────── */
+.adm-mob-menu-btn{
+  display:none;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:9px;
+  border:1px solid var(--b1);background:var(--surf2);
+  cursor:pointer;font-size:1.15rem;flex-shrink:0;
+}
+.adm-mob-overlay{
+  display:none;position:fixed;inset:0;
+  z-index:1099;background:rgba(0,0,0,.6);
+  backdrop-filter:blur(3px);
+}
+.adm-mob-overlay.show{display:block}
+
+@media(max-width:700px){
+  /* show hamburger, hide nothing */
+  .adm-mob-menu-btn{display:flex}
+  /* sidebar: hidden off-screen by default */
+  .adm-sidebar{
+    position:fixed;left:0;top:0;bottom:0;
+    z-index:1100;
+    width:78vw;max-width:270px;
+    transform:translateX(-100%);
+    transition:transform .26s cubic-bezier(.4,0,.2,1);
+    box-shadow:6px 0 32px rgba(0,0,0,.6);
+    overflow-y:auto;
+    padding-top:.5rem;
+  }
+  .adm-sidebar.mob-open{transform:translateX(0)}
+  /* main content full width */
+  .adm-main{width:100%;min-width:0;overflow-x:hidden}
+  .adm-body{overflow:hidden}
+  /* content padding */
+  .adm-scroll{padding:.75rem .75rem 5rem}
+  .acard{padding:1rem 1rem}
+  .acard-title{font-size:.95rem}
+  .agrid{grid-template-columns:1fr!important}
+  .form-row{grid-template-columns:1fr!important}
+  .adm-stats{grid-template-columns:1fr 1fr!important}
+  /* tables */
+  .atable{font-size:.75rem}
+  .atable th:nth-child(3),.atable td:nth-child(3){display:none}
+  .atable-actions{flex-direction:column;gap:.25rem}
+  /* header */
+  .adm-header{padding:0 .75rem;gap:.5rem}
+  .adm-bar{padding:.6rem .75rem}
+  /* project detail */
+  .pd-hero{height:180px;font-size:3.5rem}
+  .pd-inner{padding:1.5rem 1rem 7rem}
+  .pd-topbar{display:none}
+}
+@media(max-width:900px){
+  .about-grid,.contact-wrap{grid-template-columns:1fr}
+  .about-photo-wrap{flex-direction:row;align-items:flex-start}
+  .profile-ring{width:130px;height:130px;flex-shrink:0}
+  .adm-stats{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:640px){
+  *{-webkit-tap-highlight-color:transparent}
+  html{-webkit-text-size-adjust:100%}
+  .wrap{padding:0 1rem}
+  .section{padding:3.5rem 0}
+  input,textarea,select{font-size:16px!important}
+  .about-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .certs-grid{grid-template-columns:repeat(2,1fr)}
+  .awards-grid{grid-template-columns:1fr}
+  .hobbies-grid{grid-template-columns:repeat(3,1fr)}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .hero-btns .btn{justify-content:center}
+  .modal{padding:1.5rem;width:calc(100vw - 2rem)}
+  .login-card{padding:1.75rem;max-width:calc(100vw - 2rem)}
+}
+@media(max-width:400px){
+  .certs-grid{grid-template-columns:1fr}
+  .hobbies-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ══ INTERACTIVE ADDITIONS ══════════════════════════════════ */
+
+/* scroll progress bar */
+#scrollBar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:1000;width:0%;pointer-events:none;transition:width .08s linear}
+
+
+
+/* hero particles canvas */
+#heroCanvas{position:absolute;inset:0;pointer-events:none;opacity:.5}
+
+/* typewriter cursor blink */
+.tw-cur{display:inline-block;width:2px;height:.9em;background:var(--gold);margin-left:1px;vertical-align:middle;animation:twblink .75s step-end infinite}
+@keyframes twblink{50%{opacity:0}}
+
+/* skill bars animate in */
+.skill-fill{transition:width 1.1s cubic-bezier(.4,0,.2,1) !important}
+
+/* project card 3D tilt shine */
+.proj-shine{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.07),transparent 65%);opacity:0;transition:opacity .25s}
+.proj-card:hover .proj-shine{opacity:1}
+
+/* stagger children on reveal */
+.sk-stagger > *,.pj-stagger > *{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}
+.sk-stagger.rv-in > *,.pj-stagger.rv-in > *{opacity:1;transform:none}
+.sk-stagger.rv-in > *:nth-child(1){transition-delay:.04s}
+.sk-stagger.rv-in > *:nth-child(2){transition-delay:.1s}
+.sk-stagger.rv-in > *:nth-child(3){transition-delay:.16s}
+.sk-stagger.rv-in > *:nth-child(4){transition-delay:.22s}
+.sk-stagger.rv-in > *:nth-child(5){transition-delay:.28s}
+.sk-stagger.rv-in > *:nth-child(6){transition-delay:.34s}
+.sk-stagger.rv-in > *:nth-child(7){transition-delay:.4s}
+.sk-stagger.rv-in > *:nth-child(8){transition-delay:.46s}
+
+/* magnetic gold button */
+.btn-gold{will-change:transform;transition:transform .2s,box-shadow .2s,background .2s}
+.btn-gold:hover{box-shadow:0 8px 28px rgba(232,184,109,.3)}
+
+/* ══ EVENTS SECTION ════════════════════════════════════════ */
+.events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+.event-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);overflow:hidden;transition:border-color var(--tr),transform var(--tr),box-shadow var(--tr)}
+.event-card:hover{border-color:var(--b2);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.45)}
+.event-img{width:100%;height:200px;overflow:hidden;background:var(--surf2);display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.event-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.event-card:hover .event-img img{transform:scale(1.05)}
+.event-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,12,20,.6),transparent 50%)}
+.event-body{padding:1.2rem 1.4rem}
+.event-name{font-family:var(--serif);font-size:1.02rem;font-weight:700;margin-bottom:.25rem}
+.event-meta{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem}
+.event-date{font-size:.7rem;color:var(--gold);font-weight:600;background:var(--gdim);border:1px solid var(--gbdr);padding:.18rem .6rem;border-radius:5px}
+.event-loc{font-size:.7rem;color:var(--t3)}
+.event-desc{font-size:.82rem;color:var(--t2);line-height:1.7}
+@media(max-width:640px){.events-grid{grid-template-columns:1fr}.event-img{height:160px}}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ═══════════════════════════════════════════════════════════ -->
+<div id="scrollBar"></div>
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo" id="navLogo">Mohamed Ahmed <span class="nav-logo-badge" id="navBadge">CS Student</span></div>
+    <ul class="nav-links" id="navLinks" style="list-style:none;display:flex">
+      <li><a href="#about" data-sec="about">About</a></li>
+      <li><a href="#skills" data-sec="skills">Skills</a></li>
+      <li><a href="#projects" data-sec="projects">Projects</a></li>
+      <li><a href="#education" data-sec="education">Education</a></li>
+      <li><a href="#experience" data-sec="experience">Experience</a></li>
+      <li><a href="#volunteering" data-sec="volunteering">Volunteer</a></li>
+      <li><a href="#certifications" data-sec="certifications">Certs</a></li>
+      <li><a href="#awards" data-sec="awards">Awards</a></li>
+      <li><a href="#research" data-sec="research">Research</a></li>
+      <li><a href="#events" data-sec="events">Events</a></li>
+      <li><a href="#contact" data-sec="contact">Contact</a></li>
+    </ul>
+    <div class="nav-r">
+      <button class="nav-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+      <button class="btn btn-outline btn-sm" onclick="showLogin()">⚙ Admin</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-mesh"></div>
+  <div class="hero-grid"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="hero-pill"><span class="hero-dot"></span><span id="heroBadge">Available for Opportunities</span></div>
+      <h1 class="hero-name" id="heroName"><span>Mohamed</span><span><em>Ahmed</em></span></h1>
+      <p class="hero-role" id="heroRole">Computer Science Student — AI &amp; Cybersecurity</p>
+      <p class="hero-desc" id="heroDesc">Passionate about artificial intelligence, cybersecurity, robotics, and building impactful technology that moves the world forward.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-gold" id="heroBtn1">View Projects →</a>
+        <button class="btn btn-outline" id="heroBtn2" onclick="doCV()">Download CV ↓</button>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div><span>SCROLL</span></div>
+</section>
+
+<!-- ══ ABOUT ══════════════════════════════════════════════════════════════ -->
+<section id="about" class="section"><div class="wrap">
+  <div class="about-grid">
+    <div class="rv about-photo-wrap">
+      <div class="profile-ring" id="profileRing">
+        <div class="profile-circle" id="profileCircle"><span>👨‍💻</span></div>
+      </div>
+      <div class="about-card" id="aboutCard">
+        <div class="about-stat"><span class="stat-ico">📍</span><div><div class="stat-lbl">Location</div><div class="stat-val" id="statLoc">Egypt · Remote</div></div></div>
+        <div class="about-stat"><span class="stat-ico">🎓</span><div><div class="stat-lbl">University</div><div class="stat-val">Univ. of Hertfordshire</div></div></div>
+        <div class="about-stat"><span class="stat-ico">💼</span><div><div class="stat-lbl">Status</div><div class="stat-val" id="statStatus">Open to Work</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div id="aboutSecPhoto"></div>
+  <span class="eyebrow rv">About Me</span>
+      <h2 class="heading rv" id="aboutHead">Turning <em>ideas</em> into reality</h2>
+      <div class="bio rv" id="bioEl">
+        <p>Mohamed Ahmed is a computer science student deeply interested in artificial intelligence, cybersecurity, and robotics. He has competed in multiple robotics competitions and led his team to win first place at RoboCup Egypt 2019.</p>
+        <p>Beyond engineering, Mohamed serves as an IGCSE Physics teaching assistant and holds cybersecurity certifications, continuously pushing the boundaries of what he can build and teach.</p>
+      </div>
+      <div class="focus-tags rv" id="ftagsEl"></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ══ SKILLS ════════════════════════════════════════════════════════════ -->
+<section id="skills" class="section section-alt"><div class="wrap">
+  <div id="skillsSecPhoto"></div>
+  <span class="eyebrow rv">Skills</span>
+  <h2 class="heading rv">Technical Expertise</h2>
+  <p class="subtext rv">A growing toolkit built through projects, competitions, and self-directed learning.</p>
+  <div class="skill-cats rv" id="skillsEl"></div>
+</div></section>
+
+<!-- ══ PROJECTS ══════════════════════════════════════════════════════════ -->
+<section id="projects" class="section"><div class="wrap">
+  <div id="projSecPhoto"></div>
+  <span class="eyebrow rv">Projects</span>
+  <h2 class="heading rv">Selected Work</h2>
+  <p class="subtext rv">Case studies that showcase my technical range and problem-solving approach.</p>
+  <div class="projects-grid rv" id="projectsEl"></div>
+</div></section>
+
+<!-- ══ EXPERIENCE ════════════════════════════════════════════════════════ -->
+<!-- ══ EDUCATION ════════════════════════════════════════ -->
+<section id="education" class="section"><div class="wrap">
+  <span class="eyebrow rv">Academic Background</span>
+  <h2 class="heading rv">Education</h2>
+  <p class="subtext rv">My academic journey from school to university.</p>
+  <div id="eduSecPhoto"></div>
+  <div class="edu-grid rv" id="eduEl"></div>
+</div></section>
+
+<section id="experience" class="section section-alt"><div class="wrap">
+  <div id="expSecPhoto"></div>
+  <span class="eyebrow rv">Experience</span>
+  <h2 class="heading rv">Career Timeline</h2>
+  <p class="subtext rv">Roles and responsibilities that shaped my professional journey.</p>
+  <div class="timeline rv" id="expEl"></div>
+</div></section>
+
+<!-- ══ VOLUNTEERING ════════════════════════════════════ -->
+<section id="volunteering" class="section section-alt"><div class="wrap">
+  <span class="eyebrow rv">Giving Back</span>
+  <h2 class="heading rv">Volunteering</h2>
+  <p class="subtext rv">Community work and initiatives I've contributed to.</p>
+  <div id="volSecPhoto"></div>
+  <div class="vol-grid rv" id="volEl"></div>
+</div></section>
+
+<!-- ══ CERTIFICATIONS ════════════════════════════════════════════════════ -->
+<section id="certifications" class="section"><div class="wrap">
+  <div id="certSecPhoto"></div>
+  <span class="eyebrow rv">Certifications</span>
+  <h2 class="heading rv">Credentials</h2>
+  <p class="subtext rv">Verified achievements from leading organizations.</p>
+  <div class="certs-grid rv" id="certsEl"></div>
+</div></section>
+
+<!-- ══ AWARDS ════════════════════════════════════════════════════════════ -->
+<section id="awards" class="section section-alt"><div class="wrap">
+  <div id="awardsSecPhoto"></div>
+  <span class="eyebrow rv">Recognition</span>
+  <h2 class="heading rv">Awards &amp; Achievements</h2>
+  <p class="subtext rv">Honors earned through competition and dedication.</p>
+  <div class="awards-grid rv" id="awardsEl"></div>
+</div></section>
+
+<!-- ══ RESEARCH ══════════════════════════════════════════════════════════ -->
+<section id="research" class="section"><div class="wrap">
+  <div id="resSecPhoto"></div>
+  <span class="eyebrow rv">Research</span>
+  <h2 class="heading rv">Publications &amp; Work</h2>
+  <p class="subtext rv">Academic explorations and self-directed research.</p>
+  <div class="research-list rv" id="researchEl"></div>
+</div></section>
+
+<!-- ══ HOBBIES ═══════════════════════════════════════════════════════════ -->
+<section id="hobbies" class="section section-alt"><div class="wrap">
+  <div id="hobbiesSecPhoto"></div>
+  <span class="eyebrow rv">Interests</span>
+  <h2 class="heading rv">Beyond the Screen</h2>
+  <p class="subtext rv">What I get up to when I'm not writing code.</p>
+  <div class="hobbies-grid rv" id="hobbiesEl"></div>
+</div></section>
+
+<!-- ══ EVENTS ════════════════════════════════════════════════════════════ -->
+<section id="events" class="section"><div class="wrap">
+  <div id="eventsSecPhoto"></div>
+  <span class="eyebrow rv">Experiences</span>
+  <h2 class="heading rv">Events I've Attended</h2>
+  <p class="subtext rv">Conferences, competitions, workshops, and campus events that shaped my journey.</p>
+  <div class="events-grid rv" id="eventsEl"></div>
+</div></section>
+
+<!-- ══ CONTACT ═══════════════════════════════════════════════════════════ -->
+<section id="contact" class="section"><div class="wrap">
+  <span class="eyebrow rv">Contact</span>
+  <h2 class="heading rv">Let's Work Together</h2>
+  <p class="subtext rv">Open to collaborations, opportunities, and interesting conversations.</p>
+  <div class="contact-wrap">
+    <div class="contact-cards rv" id="contactEl"></div>
+    <div class="rv">
+      <form class="contact-form" onsubmit="submitContact(event)">
+        <div class="form-row">
+          <div class="form-field"><label>First Name</label><input placeholder="Mohamed" required/></div>
+          <div class="form-field"><label>Last Name</label><input placeholder="Ali" required/></div>
+        </div>
+        <div class="form-field"><label>Email</label><input type="email" placeholder="hello@example.com" required/></div>
+        <div class="form-field"><label>Subject</label><input placeholder="Let's collaborate on…" required/></div>
+        <div class="form-field"><label>Message</label><textarea rows="5" placeholder="Tell me about your project…" required></textarea></div>
+        <button type="submit" class="btn btn-gold" style="justify-content:center;padding:.75rem">Send Message →</button>
+        <div class="form-success" id="formOk">✅ Message sent! I'll reply within 24 hours.</div>
+      </form>
+    </div>
+  </div>
+</div></section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════════════════ -->
+<footer><div class="wrap"><div class="foot-inner">
+  <span class="foot-brand" id="footBrand">Mohamed Ahmed</span>
+  <nav class="foot-nav"><a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav>
+  <div class="foot-social" id="footSocial"></div>
+  <p class="foot-copy" id="footCopy">© 2025 Mohamed Ahmed. All rights reserved.</p>
+</div></div></footer>
+
+<!-- ══ PROJECT DETAIL PAGE ═══════════════════════════════════════════════ -->
+<div id="projDetail">
+  <div class="pd-topbar"><button class="pd-back" onclick="closePD()">←</button></div>
+  <button class="pd-back-float" onclick="closePD()">← Back to Portfolio</button>
+  <div id="pdContent"></div>
+</div>
+
+<!-- ══ CERT MODAL ════════════════════════════════════════════════════════ -->
+<div class="overlay" id="certModal" onclick="closeCertModal(event)">
+  <div class="modal"><button class="modal-x" onclick="closeCertModal()">✕</button><div id="certModalBody"></div></div>
+</div>
+
+<!-- ══ ADMIN LOGIN ════════════════════════════════════════════════════════ -->
+<div id="adminOverlay" class="overlay" onclick="closeLoginIfOutside(event)">
+  <div class="login-card" id="loginCard">
+    <div class="login-logo">⚙ Admin Panel</div>
+    <div class="login-sub">Enter your password to access the dashboard</div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="pwInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <div class="login-err" id="loginErr">Incorrect password. Try again.</div>
+    </div>
+    <button class="btn btn-gold" style="width:100%;justify-content:center;padding:.72rem" onclick="doLogin()">Enter Dashboard</button>
+
+  </div>
+</div>
+
+<!-- ══ ADMIN SHELL ════════════════════════════════════════════════════════ -->
+<div id="adminShell">
+  <div class="adm-header"><button class="adm-mob-menu-btn" id="admHamBtn" onclick="toggleAdmSidebar()">☰</button>
+    <div class="adm-logo">
+      <div class="adm-logo-icon">⚙</div>
+      <span class="adm-logo-name">Portfolio CMS</span>
+      <span class="adm-logo-badge">ADMIN</span>
+    </div>
+    <div class="adm-hdr-r">
+      <a href="#" id="viewSiteBtn" onclick="closeAdmin();return false" class="btn btn-outline btn-sm">👁 View Site</a>
+      <button class="btn btn-outline btn-sm" onclick="closeAdmin()">✕ Close</button>
+    </div>
+  </div>
+
+  <div id="admMobOverlay" class="adm-mob-overlay" onclick="closeAdmSidebar()"></div>
+  <div class="adm-body">
+    <!-- SIDEBAR -->
+    <div class="adm-sidebar">
+      <div class="adm-grp">Overview</div>
+      <div class="adm-item active" onclick="admNav(this,'overview')"><span class="adm-item-icon">📊</span> Dashboard</div>
+      <div class="adm-grp">Identity</div>
+      <div class="adm-item" onclick="admNav(this,'profile')"><span class="adm-item-icon">👤</span> Profile &amp; Hero</div>
+      <div class="adm-item" onclick="admNav(this,'links')"><span class="adm-item-icon">🔗</span> Links &amp; Nav</div>
+      <div class="adm-item" onclick="admNav(this,'media')"><span class="adm-item-icon">🖼</span> Photo &amp; Media</div>
+      <div class="adm-item" onclick="admNav(this,'background')"><span class="adm-item-icon">🌄</span> Background</div>
+      <div class="adm-grp">Content</div>
+      <div class="adm-item" onclick="admNav(this,'skills')"><span class="adm-item-icon">⚡</span> Skills</div>
+      <div class="adm-item" onclick="admNav(this,'projects')"><span class="adm-item-icon">🗂</span> Projects</div>
+      <div class="adm-item" onclick="admNav(this,'education')"><span class="adm-item-icon">🎓</span> Education</div>
+      <div class="adm-item" onclick="admNav(this,'experience')"><span class="adm-item-icon">💼</span> Experience</div>
+      <div class="adm-item" onclick="admNav(this,'volunteering')"><span class="adm-item-icon">🤝</span> Volunteering</div>
+      <div class="adm-item" onclick="admNav(this,'certifications')"><span class="adm-item-icon">🎓</span> Certifications</div>
+      <div class="adm-item" onclick="admNav(this,'awards')"><span class="adm-item-icon">🏆</span> Awards</div>
+      <div class="adm-item" onclick="admNav(this,'research')"><span class="adm-item-icon">📄</span> Research</div>
+      <div class="adm-item" onclick="admNav(this,'hobbies')"><span class="adm-item-icon">🎯</span> Hobbies</div>
+      <div class="adm-item" onclick="admNav(this,'events')"><span class="adm-item-icon">🎪</span> Events</div>
+      <div class="adm-grp">Files</div>
+      <div class="adm-item" onclick="admNav(this,'cv')"><span class="adm-item-icon">📋</span> CV Upload</div>
+      <div class="adm-grp">Customize</div>
+      <div class="adm-item" onclick="admNav(this,'fonts')"><span class="adm-item-icon">🎨</span> Fonts &amp; Colors</div>
+      <div class="adm-item" onclick="admNav(this,'secphotos')"><span class="adm-item-icon">🖼</span> Section Photos</div>
+      <div class="adm-grp">Inbox &amp; Security</div>
+      <div class="adm-item" onclick="admNav(this,'messages')"><span class="adm-item-icon">✉️</span> Messages <span class="adm-badge" id="msgBadge" style="display:none">0</span></div>
+      <div class="adm-item" onclick="admNav(this,'security')"><span class="adm-item-icon">🔐</span> Security</div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="adm-main">
+      <div class="adm-bar">
+        <div><div class="adm-bar-title" id="admTitle">Dashboard</div><div class="adm-bar-sub" id="admSub">Portfolio overview &amp; quick stats</div></div>
+      </div>
+      <div class="adm-scroll">
+
+        <!-- OVERVIEW -->
+        <div class="adm-panel active" id="ap-overview">
+          <div class="adm-stats" id="admStats"></div>
+          <div class="acard">
+            <div class="acard-title">Welcome to your Portfolio CMS</div>
+            <div style="display:flex;flex-direction:column;gap:.7rem;font-size:.83rem;color:var(--t2)">
+              <p>→ Use the sidebar to navigate and edit every section of your portfolio in real time.</p>
+              <p>→ Changes save automatically to browser storage and update the live site instantly.</p>
+              <p>→ Go to <strong style="color:var(--gold)">Photo &amp; Media</strong> to upload your circular profile photo.</p>
+              <p>→ Go to <strong style="color:var(--gold)">Background</strong> to set a custom background image for your site.</p>
+              <p>→ Project and certificate images: upload in Media, copy the URL, paste into the form.</p>
+              <p>→ This preview mirrors the full Next.js + Supabase app you downloaded.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROFILE -->
+        <div class="adm-panel" id="ap-profile">
+          <div class="acard"><div class="acard-title">Hero Section</div>
+            <div class="agrid">
+              <div class="afield"><label>Full Name</label><input id="pf-name" oninput="D.p.name=this.value;renderHero()"/></div>
+              <div class="afield"><label>Professional Title</label><input id="pf-role" oninput="D.p.role=this.value;renderHero()"/></div>
+              <div class="afield a-full"><label>Short Introduction</label><textarea id="pf-desc" rows="3" oninput="D.p.desc=this.value;renderHero()"></textarea></div>
+              <div class="afield"><label>Hero Badge Text</label><input id="pf-badge" oninput="D.p.badge=this.value;renderHero()"/></div>
+              <div class="afield a-full">
+                <label>Typewriter Phrases <span style="font-weight:400;color:var(--t3);font-size:.72rem">— one per line, cycles under your name</span></label>
+                <textarea id="pf-twphrases" rows="5" placeholder="Computer Science Student&#10;AI Enthusiast&#10;Builder · Creator" style="font-size:.82rem;line-height:1.7" oninput="D.p.twPhrases=this.value.split('\n').map(s=>s.trim()).filter(Boolean);initTypewriter()"></textarea>
+              </div>
+              <div class="afield"><label>Primary Button Label</label><input id="pf-btn1" oninput="D.p.btn1=this.value;renderHero()"/></div>
+              <div class="afield"><label>Secondary Button Label</label><input id="pf-btn2" oninput="D.p.btn2=this.value;renderHero()"/></div>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">About Section</div>
+            <div class="agrid">
+              <div class="afield a-full"><label>About Heading</label><input id="pf-ahead" oninput="D.p.ahead=this.value;renderAbout()"/></div>
+              <div class="afield a-full"><label>Biography — Paragraph 1</label><textarea id="pf-bio1" rows="4" oninput="D.p.bio1=this.value;renderAbout()"></textarea></div>
+              <div class="afield a-full"><label>Biography — Paragraph 2</label><textarea id="pf-bio2" rows="4" oninput="D.p.bio2=this.value;renderAbout()"></textarea></div>
+              <div class="afield"><label>Location (sidebar card)</label><input id="pf-loc" oninput="D.p.location=this.value;document.getElementById('statLoc').textContent=this.value"/></div>
+              <div class="afield"><label>Status (sidebar card)</label><input id="pf-status" oninput="D.p.status=this.value;document.getElementById('statStatus').textContent=this.value"/></div>
+              <div class="afield a-full"><label>Focus Tags — press Enter to add</label>
+                <div class="tag-input-wrap" id="ftagWrap" onclick="document.getElementById('ftagInp').focus()">
+                  <input class="tag-bare-input" id="ftagInp" placeholder="Add tag…" onkeydown="tagKey(event,'ftags','ftagWrap','ftagInp')"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">Footer</div>
+            <div class="agrid">
+              <div class="afield"><label>Footer Brand Name</label><input id="pf-fbrand" oninput="D.p.footBrand=this.value;renderFooter()"/></div>
+              <div class="afield"><label>Copyright Text</label><input id="pf-fcopy" oninput="D.p.footCopy=this.value;renderFooter()"/></div>
+            </div>
+          </div>
+          <button class="asave" onclick="saveProfile()">Save All Profile Changes</button>
+        </div>
+
+        <!-- LINKS -->
+        <div class="adm-panel" id="ap-links">
+          <div class="acard"><div class="acard-title">Navigation Logo</div>
+            <div class="agrid">
+              <div class="afield"><label>Logo Name</label><input id="lnk-logo" oninput="D.nav.name=this.value;renderNav()"/></div>
+              <div class="afield"><label>Logo Badge</label><input id="lnk-badge" oninput="D.nav.badge=this.value;renderNav()"/></div>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">Contact &amp; Social Links</div>
+            <div class="agrid">
+              <div class="afield"><label>Email</label><input id="lnk-email" type="email"/></div>
+              <div class="afield"><label>Phone</label><input id="lnk-phone"/></div>
+              <div class="afield"><label>GitHub URL</label><input id="lnk-gh" type="url" placeholder="https://github.com/username"/></div>
+              <div class="afield"><label>LinkedIn URL</label><input id="lnk-li" type="url" placeholder="https://linkedin.com/in/username"/></div>
+              <div class="afield"><label>Twitter / X URL</label><input id="lnk-tw" type="url"/></div>
+              <div class="afield"><label>Location Display</label><input id="lnk-loc2"/></div>
+            </div>
+            <button class="asave" onclick="saveLinks()" style="margin-top:.5rem">Save Links</button>
+          </div>
+        </div>
+
+        <!-- MEDIA -->
+        <div class="adm-panel" id="ap-media">
+          <div class="acard"><div class="acard-title">Profile Photo <span class="acard-hint">Displayed as a circle on your site</span></div>
+            <div class="profile-upload-wrap">
+              <div class="prof-ring-preview" id="profRingPrev">
+                <div class="prof-ring-inner" id="profRingInner"><span>👨‍💻</span></div>
+              </div>
+              <div class="prof-upload-btn btn btn-outline" style="position:relative;overflow:hidden">
+                <input type="file" accept="image/*" onchange="uploadProfilePhoto(this)"/>
+                📤 Upload Profile Photo
+              </div>
+              <p style="font-size:.73rem;color:var(--t3);text-align:center">JPG, PNG, WebP · Max 5 MB<br>Will display as a circle</p>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">Project &amp; Certificate Images <span class="acard-hint">Click an uploaded image to copy its URL</span></div>
+            <div class="upload-zone">
+              <input type="file" accept="image/*" multiple onchange="uploadImages(this)"/>
+              <div class="uz-icon">🖼</div>
+              <div class="uz-title">Click to upload images</div>
+              <div class="uz-hint">Multiple files supported · JPG, PNG, WebP · Max 5 MB each</div>
+            </div>
+            <div class="img-grid" id="imgGrid"></div>
+          </div>
+        </div>
+
+        <!-- BACKGROUND -->
+        <div class="adm-panel" id="ap-background">
+          <!-- GLOBAL BG -->
+          <div class="acard"><div class="acard-title">Global Site Background</div>
+            <p style="font-size:.82rem;color:var(--t2);margin-bottom:.9rem">Sets a background image behind the entire site. Each section can also have its own background below.</p>
+            <div id="bgPreview" style="margin-bottom:1rem;border-radius:10px;overflow:hidden;border:1px solid var(--b1);height:130px;background:var(--surf2);display:flex;align-items:center;justify-content:center;font-size:.83rem;color:var(--t3)">No global background set</div>
+            <div class="upload-zone">
+              <input type="file" accept="image/*" onchange="uploadBg(this)"/>
+              <div class="uz-icon">🌍</div>
+              <div class="uz-title">Upload global background</div>
+              <div class="uz-hint">Applies behind the whole site · JPG, PNG · 1920×1080+</div>
+            </div>
+            <div style="display:flex;gap:.65rem;margin-top:1rem">
+              <button class="asave" onclick="applyBg()">Apply</button>
+              <button class="a-cancel" onclick="removeBg()">Remove</button>
+            </div>
+            <div style="margin-top:1.1rem">
+              <label style="font-size:.78rem;color:var(--t2);display:block;margin-bottom:.4rem">Global Overlay Darkness</label>
+              <div style="display:flex;align-items:center;gap:.6rem;max-width:300px">
+                <input type="range" id="bgOpacity" min="0" max="0.95" step="0.05" value="0.82" oninput="updateBgOpacity(this.value)" style="flex:1;accent-color:var(--gold)"/>
+                <span id="bgOpVal" style="font-size:.75rem;color:var(--t3);min-width:30px">0.82</span>
+              </div>
+            </div>
+          </div>
+          <!-- PER-SECTION BG -->
+          <div class="acard">
+            <div class="acard-title">Per-Section Backgrounds</div>
+            <p style="font-size:.82rem;color:var(--t2);margin-bottom:1.1rem">Each section can have its own unique background image with independent opacity control.</p>
+            <div id="secBgGrid" style="display:flex;flex-direction:column;gap:.7rem"></div>
+          </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="adm-panel" id="ap-skills">
+          <div class="acard"><div class="acard-title" id="skTitle">Add Skill</div>
+            <div class="agrid">
+              <div class="afield"><label>Skill Name</label><input id="sk-name" placeholder="Python"/></div>
+              <div class="afield"><label>Category</label>
+                <select id="sk-cat"><option>Programming</option><option>AI / Machine Learning</option><option>Cybersecurity</option><option>Web Development</option><option>Tools &amp; Technologies</option><option>Soft Skills</option></select>
+              </div>
+              <div class="afield"><label>Icon (emoji)</label><input id="sk-ico" maxlength="4" placeholder="🐍"/></div>
+              <div class="afield"><label>Proficiency (1–5)</label><input id="sk-lvl" type="number" min="1" max="5" value="4"/></div>
+            </div>
+            <input type="hidden" id="sk-eid"/>
+            <div style="display:flex;gap:.6rem;margin-top:.75rem">
+              <button class="asave" onclick="saveSkill()">Save Skill</button>
+              <button class="a-cancel" onclick="cancelSkill()">Cancel</button>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">All Skills <span class="acard-hint" id="skCount"></span></div>
+            <table class="atable"><thead><tr><th>Skill</th><th>Category</th><th>Level</th><th>Actions</th></tr></thead><tbody id="skTbl"></tbody></table>
+          </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="adm-panel" id="ap-projects">
+          <div class="acard"><div class="acard-title" id="pjTitle">Add Project</div>
+            <div class="agrid">
+              <div class="afield"><label>Title</label><input id="pj-title" placeholder="Hospital Management System"/></div>
+              <div class="afield"><label>Emoji Icon</label><input id="pj-emoji" maxlength="4" placeholder="🏥"/></div>
+              <div class="afield a-full"><label>Short Description (card)</label><textarea id="pj-short" rows="2"></textarea></div>
+              <div class="afield a-full"><label>Full Overview (detail page)</label><textarea id="pj-full" rows="4"></textarea></div>
+              <div class="afield a-full"><label>Problem Statement</label><textarea id="pj-prob" rows="3"></textarea></div>
+              <div class="afield a-full"><label>Solution</label><textarea id="pj-sol" rows="3"></textarea></div>
+              <div class="afield a-full"><label>Tech Stack — press Enter to add each tag</label>
+                <div class="tag-input-wrap" id="techWrap" onclick="document.getElementById('techInp').focus()">
+                  <input class="tag-bare-input" id="techInp" placeholder="Python, React, SQL…" onkeydown="tagKey(event,'techTags','techWrap','techInp')"/>
+                </div>
+              </div>
+              <div class="afield"><label>GitHub URL</label><input id="pj-gh" type="url"/></div>
+              <div class="afield"><label>Demo URL</label><input id="pj-demo" type="url"/></div>
+              <div class="afield a-full"><label>Image URL (upload in Media tab, then paste here)</label><input id="pj-img"/></div>
+            </div>
+            <input type="hidden" id="pj-eid"/>
+            <div style="display:flex;gap:.6rem;margin-top:.75rem">
+              <button class="asave" onclick="saveProject()">Save Project</button>
+              <button class="a-cancel" onclick="cancelProject()">Cancel</button>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">All Projects</div>
+            <table class="atable"><thead><tr><th>Project</th><th>Tech Stack</th><th>Actions</th></tr></thead><tbody id="pjTbl"></tbody></table>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div class="adm-panel" id="ap-experience">
+          <div class="acard"><div class="acard-title" id="expTitle">Add Experience</div>
+            <div class="agrid">
+              <div class="afield"><label>Role / Title</label><input id="ex-role" placeholder="Teaching Assistant"/></div>
+              <div class="afield"><label>Organization</label><input id="ex-org"/></div>
+              <div class="afield"><label>Start Date</label><input id="ex-start" placeholder="Sep 2022"/></div>
+              <div class="afield"><label>End Date</label><input id="ex-end" placeholder="Present"/></div>
+              <div class="afield a-full"><label>Description</label><textarea id="ex-desc" rows="4"></textarea></div>
+            </div>
+            <input type="hidden" id="ex-eid"/>
+            <div style="display:flex;gap:.6rem;margin-top:.75rem">
+              <button class="asave" onclick="saveExp()">Save Entry</button>
+              <button class="a-cancel" onclick="cancelExp()">Cancel</button>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">All Experience</div>
+            <table class="atable"><thead><tr><th>Role</th><th>Organization</th><th>Period</th><th>Actions</th></tr></thead><tbody id="expTbl"></tbody></table>
+          </div>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="adm-panel" id="ap-certifications">
+          <div class="acard"><div class="acard-title" id="ctTitle">Add Certification</div>
+            <div class="agrid">
+              <div class="afield"><label>Title</label><input id="ct-title"/></div>
+              <div class="afield"><label>Issuer</label><input id="ct-iss"/></div>
+              <div class="afield"><label>Issue Date</label><input id="ct-date" placeholder="Mar 2023"/></div>
+              <div class="afield"><label>Icon (emoji)</label><input id="ct-ico" maxlength="4" placeholder="🔒"/></div>
+              <div class="afield a-full"><label>Description</label><textarea id="ct-desc" rows="3"></textarea></div>
+              <div class="afield"><label>Verification URL</label><input id="ct-url" type="url"/></div>
+              <div class="afield"><label>Certificate Image URL</label><input id="ct-img"/></div>
+            </div>
+            <input type="hidden" id="ct-eid"/>
+            <div style="display:flex;gap:.6rem;margin-top:.75rem">
+              <button class="asave" onclick="saveCert()">Save Certification</button>
+              <button class="a-cancel" onclick="cancelCert()">Cancel</button>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">All Certifications</div>
+            <table class="atable"><thead><tr><th>Title</th><th>Issuer</th><th>Date</th><th>Actions</th></tr></thead><tbody id="ctTbl"></tbody></table>
+          </div>
+        </div>
+
+        <!-- AWARDS -->
+        <div class="adm-panel" id="ap-awards">
+          <div class="acard"><div class="acard-title" id="awTitle">Add Award</div>
+            <div class="agrid">
+              <div class="afield"><label>Title</label><input id="aw-title"/></div>
+              <div class="afield"><label>Organization</label><input id="aw-org"/></div>
+              <div class="afield"><label>Year</label><input id="aw-year" placeholder="2019"/></div>
+              <div class="afield"><label>Emoji Badge</label><input id="aw-ico" maxlength="4" placeholder="🥇"/></div>
+              <div class="afield a-full"><label>Description</label><textarea id="aw-desc" rows="3"></textarea></div>
+            </div>
+            <input type="hidden" id="aw-eid"/>
+            <div style="display:flex;gap:.6rem;margin-top:.75rem">
+              <button class="asave" onclick="saveAward()">Save Award</button>
+              <button class="a-cancel" onclick="cancelAward()">Cancel</button>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">All Awards</div>
+            <table class="atable"><thead><tr><th>Title</th><th>Organization</th><th>Year</th><th>Actions</th></tr></thead><tbody id="awTbl"></tbody></table>
+          </div>
+        </div>
+
+        <!-- RESEARCH -->
+        <div class="adm-panel" id="ap-research">
+          <div class="acard"><div class="acard-title" id="reTitle">Add Research</div>
+            <div class="agrid">
+              <div class="afield a-full"><label>Title</label><input id="re-title"/></div>
+              <div class="afield a-full"><label>Abstract / Summary</label><textarea id="re-abs" rows="4"></textarea></div>
+              <div class="afield"><label>Link / DOI URL</label><input id="re-link"/></div>
+              <div class="afield"><label>Year</label><input id="re-year" placeholder="2024"/></div>
+            </div>
+            <input type="hidden" id="re-eid"/>
+            <div style="display:flex;gap:.6rem;margin-top:.75rem">
+              <button class="asave" onclick="saveRes()">Save</button>
+              <button class="a-cancel" onclick="cancelRes()">Cancel</button>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">All Research</div>
+            <table class="atable"><thead><tr><th>Title</th><th>Year</th><th>Actions</th></tr></thead><tbody id="reTbl"></tbody></table>
+          </div>
+        </div>
+
+        <!-- HOBBIES -->
+        <div class="adm-panel" id="ap-hobbies">
+          <div class="acard"><div class="acard-title">Add Hobby</div>
+            <div class="agrid">
+              <div class="afield"><label>Name</label><input id="hb-name" placeholder="Swimming"/></div>
+              <div class="afield"><label>Emoji</label><input id="hb-ico" maxlength="4" placeholder="🏊"/></div>
+            </div>
+            <button class="asave" onclick="addHobby()" style="margin-top:.75rem">Add Hobby</button>
+          </div>
+          <div class="acard"><div class="acard-title">All Hobbies</div>
+            <table class="atable"><thead><tr><th>Icon</th><th>Name</th><th>Actions</th></tr></thead><tbody id="hbTbl"></tbody></table>
+          </div>
+        </div>
+
+        <!-- CV -->
+
+        <!-- EVENTS -->
+        <div class="adm-panel" id="ap-events">
+          <div class="acard">
+            <div class="acard-title" id="evFormTitle">Add Event</div>
+            <div class="agrid">
+              <div class="afield"><label>Event Name</label><input id="ev-name" placeholder="RoboCup Egypt 2019"/></div>
+              <div class="afield"><label>Date / Year</label><input id="ev-date" placeholder="March 2019"/></div>
+              <div class="afield"><label>Location</label><input id="ev-loc" placeholder="Cairo, Egypt"/></div>
+              <div class="afield a-full"><label>Description</label><textarea id="ev-desc" rows="3" placeholder="What happened, what you did, what you achieved..."></textarea></div>
+            </div>
+            <div class="afield" style="margin-top:.75rem">
+              <label>Event Photo</label>
+              <div style="display:flex;align-items:center;gap:.75rem;margin-top:.4rem;flex-wrap:wrap">
+                <div id="evImgPreview" style="width:100px;height:68px;border-radius:9px;background:var(--surf2);border:1px solid var(--b1);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0">📸</div>
+                <div class="btn btn-outline btn-sm" style="position:relative;overflow:hidden">Upload Photo<input type="file" accept="image/*" onchange="uploadEvImg(this)" style="position:absolute;inset:0;opacity:0;cursor:pointer"/></div>
+                <button class="a-cancel" onclick="clearEvImg()">Remove</button>
+              </div>
+            </div>
+            <input type="hidden" id="ev-eid"/><input type="hidden" id="ev-img"/>
+            <div style="display:flex;gap:.6rem;margin-top:.9rem">
+              <button class="asave" onclick="saveEvent()">Save</button>
+              <button class="a-cancel" onclick="cancelEvent()">Cancel</button>
+            </div>
+          </div>
+          <div class="acard">
+            <div class="acard-title">All Events</div>
+            <table class="atable"><thead><tr><th>Event</th><th>Date</th><th>Location</th><th>Actions</th></tr></thead><tbody id="evTbl"></tbody></table>
+          </div>
+        </div>
+        <div class="adm-panel" id="ap-cv">
+          <div class="acard"><div class="acard-title">CV / Resume Upload</div>
+            <div id="cvStatus" style="padding:.8rem 1rem;background:var(--surf2);border:1px solid var(--b1);border-radius:9px;font-size:.82rem;color:var(--t3);margin-bottom:1rem">No CV uploaded yet.</div>
+            <div class="upload-zone">
+              <input type="file" accept=".pdf,.doc,.docx" onchange="uploadCV(this)"/>
+              <div class="uz-icon">📋</div>
+              <div class="uz-title">Click to upload your CV</div>
+              <div class="uz-hint">PDF recommended · Max 5 MB</div>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">Button Settings</div>
+            <div class="agrid">
+              <div class="afield"><label>Button Label</label><input id="cv-lbl" oninput="D.cv.label=this.value;renderHero()"/></div>
+              <div class="afield"><label>Download Filename</label><input id="cv-fname"/></div>
+            </div>
+            <button class="asave" onclick="saveCVSettings()" style="margin-top:.75rem">Save Settings</button>
+          </div>
+        </div>
+
+
+        <!-- EDUCATION -->
+        <div class="adm-panel" id="ap-education">
+          <div class="acard"><div class="acard-title" id="eduFormTitle">Add Education</div>
+            <div class="agrid">
+              <div class="afield"><label>School / University</label><input id="ed-school" placeholder="University of Hertfordshire"/></div>
+              <div class="afield"><label>Degree</label><input id="ed-degree" placeholder="Bachelor of Science"/></div>
+              <div class="afield"><label>Field of Study</label><input id="ed-field" placeholder="Computer Science — AI &amp; Cybersecurity"/></div>
+              <div class="afield"><label>Start</label><input id="ed-start" placeholder="2024"/></div>
+              <div class="afield"><label>End</label><input id="ed-end" placeholder="2027 or Present"/></div>
+              <div class="afield"><label>Status</label><select id="ed-status"><option value="current">● In Progress</option><option value="completed">✓ Completed</option></select></div>
+              <div class="afield"><label>Location</label><input id="ed-loc" placeholder="Egypt / UK"/></div>
+              <div class="afield"><label>GPA / Grade</label><input id="ed-gpa" placeholder="optional"/></div>
+              <div class="afield a-full"><label>Notes</label><textarea id="ed-desc" rows="3"></textarea></div>
+            </div>
+            <div class="afield" style="margin-top:.75rem"><label>School Logo</label>
+              <div style="display:flex;align-items:center;gap:.75rem;margin-top:.38rem">
+                <div id="edLogoPreview" style="width:64px;height:64px;border-radius:11px;background:var(--surf2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;overflow:hidden;flex-shrink:0">🏫</div>
+                <div class="btn btn-outline btn-sm" style="position:relative;overflow:hidden">Upload Logo<input type="file" accept="image/*" onchange="uploadEduLogo(this)" style="position:absolute;inset:0;opacity:0;cursor:pointer"/></div>
+                <button class="a-cancel" onclick="clearEduLogo()">Remove</button>
+              </div>
+            </div>
+            <input type="hidden" id="ed-eid"/><input type="hidden" id="ed-logo"/>
+            <div style="display:flex;gap:.6rem;margin-top:.9rem">
+              <button class="asave" onclick="saveEdu()">Save</button>
+              <button class="a-cancel" onclick="cancelEdu()">Cancel</button>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">All Education</div>
+            <table class="atable"><thead><tr><th>School</th><th>Degree</th><th>Period</th><th>Status</th><th>Actions</th></tr></thead><tbody id="eduTbl"></tbody></table>
+          </div>
+        </div>
+
+        <!-- VOLUNTEERING -->
+        <div class="adm-panel" id="ap-volunteering">
+          <div class="acard"><div class="acard-title" id="volFormTitle">Add Volunteering</div>
+            <div class="agrid">
+              <div class="afield"><label>Role</label><input id="vl-role" placeholder="Event Organizer"/></div>
+              <div class="afield"><label>Organization</label><input id="vl-org" placeholder="Student Union"/></div>
+              <div class="afield"><label>Emoji Icon</label><input id="vl-ico" maxlength="4" placeholder="🤝"/></div>
+              <div class="afield"><label>Start</label><input id="vl-start" placeholder="Oct 2024"/></div>
+              <div class="afield"><label>End</label><input id="vl-end" placeholder="Present"/></div>
+              <div class="afield a-full"><label>Description</label><textarea id="vl-desc" rows="4"></textarea></div>
+            </div>
+            <input type="hidden" id="vl-eid"/>
+            <div style="display:flex;gap:.6rem;margin-top:.75rem">
+              <button class="asave" onclick="saveVol()">Save</button>
+              <button class="a-cancel" onclick="cancelVol()">Cancel</button>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">All Volunteering</div>
+            <table class="atable"><thead><tr><th>Role</th><th>Organization</th><th>Period</th><th>Actions</th></tr></thead><tbody id="volTbl"></tbody></table>
+          </div>
+        </div>
+
+        <!-- FONTS & COLORS -->
+        <div class="adm-panel" id="ap-fonts">
+          <div class="acard"><div class="acard-title">Accent Color</div>
+            <p style="font-size:.82rem;color:var(--t2);margin-bottom:1rem">Changes all gold highlights, buttons, and active elements.</p>
+            <div style="display:flex;align-items:center;gap:.85rem;flex-wrap:wrap;margin-bottom:1rem">
+              <input type="color" id="accentPicker" value="#e8b86d" oninput="liveAccent(this.value)" style="width:44px;height:44px;border-radius:10px;border:2px solid var(--b2);cursor:pointer;padding:2px;background:transparent"/>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+                <button class="color-swatch" style="background:#e8b86d" onclick="setAccent('#e8b86d')" title="Gold"></button>
+                <button class="color-swatch" style="background:#2dd4bf" onclick="setAccent('#2dd4bf')" title="Teal"></button>
+                <button class="color-swatch" style="background:#a78bfa" onclick="setAccent('#a78bfa')" title="Purple"></button>
+                <button class="color-swatch" style="background:#f472b6" onclick="setAccent('#f472b6')" title="Pink"></button>
+                <button class="color-swatch" style="background:#60a5fa" onclick="setAccent('#60a5fa')" title="Blue"></button>
+                <button class="color-swatch" style="background:#34d399" onclick="setAccent('#34d399')" title="Green"></button>
+                <button class="color-swatch" style="background:#fb923c" onclick="setAccent('#fb923c')" title="Orange"></button>
+                <button class="color-swatch" style="background:#f87171" onclick="setAccent('#f87171')" title="Red"></button>
+              </div>
+            </div>
+            <button class="asave" onclick="saveAccent()">Save Accent Color</button>
+          </div>
+          <div class="acard"><div class="acard-title">Heading Font</div>
+            <p style="font-size:.82rem;color:var(--t2);margin-bottom:.9rem">Changes the display font across headings and your name.</p>
+            <div style="display:flex;gap:.6rem;flex-wrap:wrap" id="fontOpts">
+              <button class="font-opt active" data-font="'Playfair Display',Georgia,serif" onclick="setFont(this)">Playfair (default)</button>
+              <button class="font-opt" data-font="'Merriweather',Georgia,serif" onclick="setFont(this)">Merriweather</button>
+              <button class="font-opt" data-font="'Lora',Georgia,serif" onclick="setFont(this)">Lora</button>
+              <button class="font-opt" data-font="'Cormorant Garamond',Georgia,serif" onclick="setFont(this)">Cormorant</button>
+              <button class="font-opt" data-font="'Space Grotesk',sans-serif" onclick="setFont(this)">Space Grotesk</button>
+              <button class="font-opt" data-font="system-ui,sans-serif" onclick="setFont(this)">System UI</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION PHOTOS -->
+        <div class="adm-panel" id="ap-secphotos">
+          <div class="acard">
+            <div class="acard-title">Section Banner Photos</div>
+            <p style="font-size:.82rem;color:var(--t2);margin-bottom:1.2rem">Upload a wide banner image for each section. It appears as a full-width photo at the top of that section — professionally integrated.</p>
+            <div id="secPhotoGrid" style="display:flex;flex-direction:column;gap:.75rem"></div>
+          </div>
+        </div>
+
+        <!-- MESSAGES -->
+        <div class="adm-panel" id="ap-messages">
+          <div class="acard">
+            <div class="acard-title" style="display:flex;justify-content:space-between;align-items:center">
+              <span>Messages <span style="font-size:.72rem;font-weight:400;color:var(--t3)" id="msgCountLbl"></span></span>
+              <button class="asave" style="font-size:.72rem;padding:.3rem .75rem" onclick="markAllRead()">Mark All Read</button>
+            </div>
+            <div id="msgsContainer"><p style="color:var(--t3);font-size:.83rem;text-align:center;padding:2.5rem">📭 No messages yet.</p></div>
+          </div>
+        </div>
+
+        <!-- SECURITY -->
+        <div class="adm-panel" id="ap-security">
+          <div class="acard"><div class="acard-title">Change Admin Password</div>
+            <div style="max-width:340px;display:flex;flex-direction:column;gap:.8rem">
+              <div class="afield"><label>Current Password</label><input type="password" id="sec-cur"/></div>
+              <div class="afield"><label>New Password (min 6 chars)</label><input type="password" id="sec-new"/></div>
+              <div class="afield"><label>Confirm New Password</label><input type="password" id="sec-conf"/></div>
+              <div id="secErr" style="display:none;font-size:.78rem;color:var(--rose);padding:.45rem .7rem;background:rgba(248,113,113,.08);border-radius:7px;border:1px solid rgba(248,113,113,.2)"></div>
+              <button class="asave" onclick="changePassword()">Update Password</button>
+            </div>
+          </div>
+          <div class="acard"><div class="acard-title">Security Info</div>
+            <div style="font-size:.82rem;color:var(--t2);line-height:1.8">
+              <p>→ Password is hashed — never stored as plain text.</p>
+              <p>→ 5 failed attempts triggers a 60-second lockout.</p>
+
+            </div>
+          </div>
+        </div>
+      </div><!-- end adm-scroll -->
+    </div><!-- end adm-main -->
+  </div><!-- end adm-body -->
+</div><!-- end adminShell -->
+
+<div class="toast" id="toast">Saved</div>
+
+<script>
+// ═══════════════════════════════════
+// DATA MODEL
+// ═══════════════════════════════════
+const DEF = {
+  p:{
+    name:'Mohamed Ahmed', role:'Computer Science Student — AI & Cybersecurity',
+    desc:'Passionate about artificial intelligence, cybersecurity, robotics, and building impactful technology that moves the world forward.',
+    badge:'Available for Opportunities', btn1:'View Projects →', btn2:'Download CV ↓',
+    ahead:'Turning <em>ideas</em> into reality',
+    bio1:'Mohamed Ahmed is a computer science student deeply interested in artificial intelligence, cybersecurity, and robotics. He led his team to win first place at RoboCup Egypt 2019.',
+    bio2:'Beyond engineering, Mohamed serves as an IGCSE Physics teaching assistant and holds cybersecurity certifications, continuously expanding what he can build and teach.',
+    location:'Egypt · Remote Friendly', status:'Open to Work',
+    ftags:['🤖 AI','🔒 Cybersecurity','⚙️ Robotics','💻 Software','📚 Teaching'],
+    footBrand:'Mohamed Ahmed', footCopy:'© 2025 Mohamed Ahmed. All rights reserved.',
+    twPhrases:['Computer Science Student — AI & Cybersecurity','AI & Cybersecurity Enthusiast','Robotics & Embedded Systems','Builder · Creator · Learner']
+  },
+  nav:{ name:'Mohamed Ahmed', badge:'CS Student' },
+  links:{ email:'mohamedahmed@email.com', phone:'', github:'https://github.com', linkedin:'https://linkedin.com', twitter:'', location:'Egypt · Remote Friendly' },
+  cv:{ label:'Download CV ↓', fname:'Mohamed_Ahmed_CV.pdf', data:null },
+  profilePhoto: null,
+  bgImage: null,
+  bgOpacity: 0.82,
+  secBgImages: {},
+  secBgOpacities: {},
+  images: [],
+  skills:[
+    {id:1,name:'Python',cat:'Programming',ico:'🐍',lvl:5},
+    {id:2,name:'SQL',cat:'Programming',ico:'🗄️',lvl:4},
+    {id:3,name:'C++',cat:'Programming',ico:'⚙️',lvl:3},
+    {id:4,name:'JavaScript',cat:'Programming',ico:'🟨',lvl:4},
+    {id:5,name:'Machine Learning',cat:'AI / Machine Learning',ico:'🧠',lvl:3},
+    {id:6,name:'Neural Networks',cat:'AI / Machine Learning',ico:'🔗',lvl:3},
+    {id:7,name:'Network Security',cat:'Cybersecurity',ico:'🔒',lvl:4},
+    {id:8,name:'Ethical Hacking',cat:'Cybersecurity',ico:'🎯',lvl:3},
+    {id:9,name:'Next.js',cat:'Web Development',ico:'▲',lvl:4},
+    {id:10,name:'Tailwind CSS',cat:'Web Development',ico:'🎨',lvl:4},
+    {id:11,name:'HTML / CSS',cat:'Web Development',ico:'🌐',lvl:5},
+    {id:12,name:'Git',cat:'Tools & Technologies',ico:'🌿',lvl:4},
+    {id:13,name:'Linux',cat:'Tools & Technologies',ico:'🐧',lvl:3},
+    {id:14,name:'Robotics',cat:'Tools & Technologies',ico:'🤖',lvl:4},
+  ],
+  projects:[
+    {id:1,emoji:'🏥',title:'Hospital Management System',short:'SQL-based system for managing hospital patient records and administration.',full:'A comprehensive hospital management system designed to streamline patient records, doctor assignments, appointment scheduling, and billing workflows.',problem:'Hospitals struggle with fragmented patient data and inefficient manual record-keeping.',solution:'Built a normalized relational database with stored procedures and views to handle all core hospital operations.',tech:['SQL','Database Design','PostgreSQL'],github:'https://github.com',demo:'',img:''},
+    {id:2,emoji:'🎓',title:'Student Record System',short:'Python application to manage student information and academic records.',full:'A Python-based student record system enabling institutions to manage profiles, enrollments, transcripts, and grade tracking.',problem:'Manual student record management is error-prone and time-consuming.',solution:'Developed a class-based Python app with CSV persistence and a menu-driven CLI.',tech:['Python','OOP','Data Management'],github:'https://github.com',demo:'',img:''},
+    {id:3,emoji:'⚙️',title:'SIM8 Microcontroller Firmware',short:'Embedded systems project using microcontroller programming and hardware integration.',full:'Low-level firmware for the SIM8 microcontroller platform with real-time control for robotics applications.',problem:'Needed a reliable firmware layer for robotics competition hardware.',solution:'Wrote interrupt-driven C++ firmware with modular peripheral drivers.',tech:['C++','Embedded Systems','Hardware'],github:'https://github.com',demo:'',img:''},
+  ],
+  experience:[
+    {id:1,role:'IGCSE Physics Teaching Assistant',org:'Private Academy',start:'Sep 2022',end:'Present',desc:'Assist students in understanding physics concepts, prepare learning materials, and provide one-on-one tutoring for IGCSE exam preparation.'},
+    {id:2,role:'Robotics Team Leader',org:'RoboCup Egypt',start:'2018',end:'2019',desc:'Led a team in designing and programming an autonomous robot, winning First Place at the national RoboCup Egypt competition.'},
+  ],
+  certifications:[
+    {id:1,title:'Introduction to Cybersecurity',iss:'Cisco Networking Academy',date:'Mar 2023',ico:'🔒',desc:'Foundations of cybersecurity including threat types, network security principles, and defense strategies.',url:'https://cisco.com',img:''},
+    {id:2,title:'Python Essentials',iss:'Cisco Networking Academy',date:'Jan 2023',ico:'🐍',desc:'Core Python programming covering data structures, OOP, file I/O, and error handling.',url:'https://cisco.com',img:''},
+    {id:3,title:'AI Fundamentals',iss:'IBM SkillsBuild',date:'Jun 2023',ico:'🧠',desc:'Introduction to AI concepts, machine learning workflows, and neural network basics.',url:'https://ibm.com',img:''},
+  ],
+  awards:[
+    {id:1,title:'First Place — Robotics',org:'RoboCup Egypt',year:'2019',ico:'🥇',desc:"Led team to national victory in Egypt's premier robotics competition against 40+ teams."},
+    {id:2,title:'National Swimming Medals',org:'Egyptian Swimming Federation',year:'2018',ico:'🏊',desc:'Multiple medals in national-level competitive swimming across different categories.'},
+    {id:3,title:'Physics Excellence Award',org:'IGCSE Academy',year:'2021',ico:'⚡',desc:'Recognized for outstanding academic performance and teaching contributions.'},
+  ],
+  research:[
+    {id:1,title:'AI Applications in Cybersecurity: A Survey',abs:'A review of AI and ML techniques applied to intrusion detection, anomaly detection, and threat intelligence in cybersecurity.',link:'#',year:'2024'},
+    {id:2,title:'Autonomous Navigation in Constrained Environments',abs:'Research into path-planning and sensor fusion for small-scale autonomous robots in competition environments.',link:'#',year:'2023'},
+  ],
+  hobbies:[
+    {id:1,ico:'🤖',name:'Robotics'},{id:2,ico:'🏊',name:'Swimming'},
+    {id:3,ico:'📚',name:'Teaching'},{id:4,ico:'🔐',name:'CTF Challenges'},
+    {id:5,ico:'🎮',name:'Gaming'},{id:6,ico:'🎵',name:'Music'},
+    {id:7,ico:'✈️',name:'Travel'},{id:8,ico:'📷',name:'Photography'},
+  ],
+  education:[
+    {id:1,school:'University of Hertfordshire',degree:'Bachelor of Science',field:'Computer Science — AI & Cybersecurity',start:'2024',end:'2027',status:'current',gpa:'',loc:'Global Academic Foundation, Egypt',desc:'Focusing on AI, cybersecurity and software engineering. Active as PR member of the Student Union.',logo:''},
+    {id:2,school:'IGCSE Secondary School',degree:'IGCSE',field:'Sciences & Mathematics',start:'2021',end:'2024',status:'completed',gpa:'',loc:'Egypt',desc:'Completed IGCSE with focus on Physics, Mathematics and Computer Science.',logo:''},
+  ],
+  volunteering:[
+    {id:1,role:'PR Member & Event Organizer',org:'UH Student Union',ico:'🎓',start:'Oct 2024',end:'Present',desc:'Organize campus events including Cultural Festival and Talent Show.'},
+    {id:2,role:'Physics Teaching Assistant',org:'Private Academy',ico:'⚛️',start:'Sep 2022',end:'Present',desc:'Assist students with IGCSE Physics concepts and exam preparation.'},
+  ],
+  events:[
+    {id:1,name:'RoboCup Egypt 2019',date:'2019',loc:'Egypt',desc:'Led my team to 1st place in the RoboCup Egypt national competition.',img:''},
+    {id:2,name:'UH Cultural Festival',date:'2024',loc:'Global Academic Foundation, Egypt',desc:'Organized and participated in the university cultural festival as Student Union PR member.',img:''},
+  ],
+  messages:[],
+  sectionBgs:{},
+  accentColor:'#e8b86d',
+  serifFont:"'Playfair Display',Georgia,serif"
+};
+
+// ═══════════════════════════════════
+// INIT
+// ═══════════════════════════════════
+let D = {};
+let tagState = { ftags:[], techTags:[] };
+let darkMode = true;
+
+function loadData() {
+  try {
+    const s = localStorage.getItem('pf_v4');
+    if(s) D = JSON.parse(s); else D = JSON.parse(JSON.stringify(DEF));
+  } catch { D = JSON.parse(JSON.stringify(DEF)); }
+  if(!D.events) D.events = JSON.parse(JSON.stringify(DEF.events));
+  if(!D.p.twPhrases) D.p.twPhrases = JSON.parse(JSON.stringify(DEF.p.twPhrases));
+  if(!D.messages) D.messages = [];
+  if(!D.sectionBgs) D.sectionBgs = {};
+  if(!D.education) D.education = JSON.parse(JSON.stringify(DEF.education));
+  if(!D.volunteering) D.volunteering = JSON.parse(JSON.stringify(DEF.volunteering));
+  if(!D.secBgImages) D.secBgImages = {};
+  if(!D.secBgOpacities) D.secBgOpacities = {};
+  if(!D.accentColor) D.accentColor = '#e8b86d';
+  if(!D.serifFont) D.serifFont = "'Playfair Display',Georgia,serif";
+}
+function saveData(msg='Saved!') {
+  try { localStorage.setItem('pf_v4', JSON.stringify(D)); } catch { showToast('Storage full','err'); return; }
+  showToast(msg);
+}
+
+loadData();
+
+// ═══════════════════════════════════
+// TOAST
+// ═══════════════════════════════════
+let toastTimer;
+function showToast(msg, type='ok') {
+  const t = document.getElementById('toast');
+  t.textContent = (type==='ok'?'✅ ':'❌ ') + msg;
+  t.className = 'toast ' + type + ' show';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+// ═══════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.07 });
+
+function initReveal() {
+  document.querySelectorAll('.rv').forEach(el => revealObs.observe(el));
+}
+
+// ═══════════════════════════════════
+// ACTIVE NAV LINK
+// ═══════════════════════════════════
+function initActiveNav() {
+  const sections = ['about','skills','projects','education','experience','volunteering','certifications','awards','research','hobbies','events','contact'];
+  const links = document.querySelectorAll('.nav-links a[data-sec]');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const link = document.querySelector(`.nav-links a[data-sec="${e.target.id}"]`);
+      if(link) link.classList.toggle('active', e.isIntersecting);
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(id => { const el = document.getElementById(id); if(el) obs.observe(el); });
+}
+
+// ═══════════════════════════════════
+// NAV SCROLL
+// ═══════════════════════════════════
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+// ═══════════════════════════════════
+// THEME TOGGLE
+// ═══════════════════════════════════
+function toggleTheme() {
+  darkMode = !darkMode;
+  const r = document.documentElement.style;
+  if(!darkMode) {
+    r.setProperty('--bg','#f5f4ef');r.setProperty('--bg2','#ece9e0');
+    r.setProperty('--surf','#ffffff');r.setProperty('--surf2','#f0ede4');
+    r.setProperty('--b1','#ddd9cc');r.setProperty('--b2','#c9c4b4');
+    r.setProperty('--t1','#1a1710');r.setProperty('--t2','#5a5540');r.setProperty('--t3','#9a9478');
+  } else {
+    r.setProperty('--bg','#0a0c14');r.setProperty('--bg2','#0f1120');
+    r.setProperty('--surf','#141729');r.setProperty('--surf2','#1a1f35');
+    r.setProperty('--b1','#222540');r.setProperty('--b2','#2e3358');
+    r.setProperty('--t1','#eef0ff');r.setProperty('--t2','#8b90b8');r.setProperty('--t3','#484d72');
+  }
+  document.getElementById('themeBtn').textContent = darkMode ? '🌙' : '☀️';
+}
+
+// ═══════════════════════════════════
+// RENDER FUNCTIONS
+// ═══════════════════════════════════
+function renderAll() {
+  renderHero(); renderAbout(); renderSkills(); renderProjects();
+  renderEdu(); renderVol(); renderExp(); renderCerts(); renderAwards(); renderResearch();
+  renderHobbies(); renderEvents(); renderContact(); renderFooter(); renderNav();
+  applyBgOnLoad(); applyThemeSettings();
+  setTimeout(initReveal, 80);
+  setTimeout(initInteractive, 200);
+  initActiveNav();
+}
+
+function renderHero() {
+  const p = D.p;
+  const parts = (p.name || 'Mohamed Ahmed').split(' ');
+  document.getElementById('heroName').innerHTML = '<span>' + parts[0] + '</span><span><em>' + parts.slice(1).join(' ') + '</em></span>';
+  document.getElementById('heroRole').textContent = p.role || '';
+  document.getElementById('heroDesc').textContent = p.desc || '';
+  document.getElementById('heroBadge').textContent = p.badge || '';
+  document.getElementById('heroBtn1').textContent = p.btn1 || 'View Projects →';
+  document.getElementById('heroBtn2').textContent = D.cv.label || p.btn2 || 'Download CV ↓';
+}
+
+function renderAbout() {
+  const p = D.p;
+  document.getElementById('aboutHead').innerHTML = p.ahead || '';
+  document.getElementById('bioEl').innerHTML = '<p>' + (p.bio1||'') + '</p>' + (p.bio2 ? '<p>'+p.bio2+'</p>' : '');
+  document.getElementById('ftagsEl').innerHTML = (p.ftags||[]).map(t => `<span class="focus-tag">${t}</span>`).join('');
+  document.getElementById('statLoc').textContent = p.location || '';
+  document.getElementById('statStatus').textContent = p.status || '';
+  const circle = document.getElementById('profileCircle');
+  circle.innerHTML = D.profilePhoto ? `<img src="${D.profilePhoto}" alt="Profile"/>` : '<span>👨‍💻</span>';
+}
+
+function renderNav() {
+  const n = D.nav;
+  document.getElementById('navLogo').innerHTML = (n.name||'Mohamed Ahmed') + ' <span class="nav-logo-badge">' + (n.badge||'Portfolio') + '</span>';
+}
+
+function renderSkills() {
+  const cats = [...new Set(D.skills.map(s=>s.cat))];
+  const skillsEl=document.getElementById('skillsEl');skillsEl.classList.add('sk-stagger');skillsEl.innerHTML = cats.map(cat => `
+    <div>
+      <div class="skill-cat-head">
+        <span class="skill-cat-lbl">${cat}</span><div class="skill-cat-line"></div>
+      </div>
+      <div class="skill-chips">
+        ${D.skills.filter(s=>s.cat===cat).map(s=>`
+          <div class="skill-chip">
+            <span>${s.ico||'•'}</span><span>${s.name}</span>
+            <div class="skill-bar"><div class="skill-fill" style="width:${(s.lvl/5)*100}%"></div></div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function renderProjects() {
+  const projEl=document.getElementById('projectsEl');projEl.classList.add('pj-stagger');projEl.innerHTML = D.projects.map(p => `
+    <div class="proj-card" onclick="openPD(${p.id})">
+      <div class="proj-thumb">
+        ${p.img ? `<img src="${p.img}" alt="${p.title}"/>` : `<span>${p.emoji||'💻'}</span>`}
+        <div class="proj-overlay"></div><div class="proj-shine"></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">${(p.tech||[]).map(t=>`<span class="proj-tag">${t}</span>`).join('')}</div>
+        <h3 class="proj-title">${p.title}</h3>
+        <p class="proj-desc">${p.short}</p>
+        <div class="proj-foot">
+          <div class="proj-links">
+            ${p.github?`<a href="${p.github}" target="_blank" class="proj-lnk proj-gh" onclick="event.stopPropagation()">GitHub</a>`:''}
+            ${p.demo?`<a href="${p.demo}" target="_blank" class="proj-lnk proj-live" onclick="event.stopPropagation()">Demo</a>`:''}
+          </div>
+          <div class="proj-arrow">↗</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function renderExp() {
+  document.getElementById('expEl').innerHTML = D.experience.map((e,i) => `
+    <div class="tl-item" style="transition-delay:${i*0.1}s">
+      <div class="tl-dot"></div>
+      <div class="tl-row">
+        <div>
+          <div class="tl-role">${e.role}</div>
+          <div class="tl-org">${e.org}</div>
+        </div>
+        <span class="tl-period">${e.start} — ${e.end}</span>
+      </div>
+      <p class="tl-desc">${e.desc}</p>
+    </div>`).join('');
+  document.querySelectorAll('.tl-item').forEach(el => {
+    new IntersectionObserver(([en])=>{if(en.isIntersecting)el.classList.add('in');},{threshold:.1}).observe(el);
+  });
+}
+
+function renderCerts() {
+  document.getElementById('certsEl').innerHTML = D.certifications.map(c => `
+    <div class="cert-card" onclick="openCertModal(${c.id})">
+      <div class="cert-ico">${c.ico||'🎓'}</div>
+      <div class="cert-title">${c.title}</div>
+      <div class="cert-iss">${c.iss}</div>
+      <div class="cert-date">Issued ${c.date}</div>
+    </div>`).join('');
+}
+
+function renderAwards() {
+  document.getElementById('awardsEl').innerHTML = D.awards.map(a => `
+    <div class="award-card">
+      <div class="award-badge">${a.ico||'🏆'}</div>
+      <div class="award-title">${a.title}</div>
+      <div class="award-org">${a.org}</div>
+      <p class="award-desc">${a.desc}</p>
+      <div class="award-year">${a.year}</div>
+    </div>`).join('');
+}
+
+function renderResearch() {
+  document.getElementById('researchEl').innerHTML = D.research.map((r,i) => `
+    <div class="research-card">
+      <div class="research-num">0${i+1}</div>
+      <div>
+        <div class="research-title">${r.title}</div>
+        <p class="research-abs">${r.abs}</p>
+        <a href="${r.link||'#'}" class="btn btn-outline btn-sm" style="text-decoration:none" ${r.link&&r.link!=='#'?'target="_blank"':''}>Read More →</a>
+      </div>
+    </div>`).join('');
+}
+
+function renderHobbies() {
+  document.getElementById('hobbiesEl').innerHTML = D.hobbies.map(h => `
+    <div class="hobby-card"><div class="hobby-ico">${h.ico}</div><div class="hobby-name">${h.name}</div></div>`).join('');
+}
+
+function renderContact() {
+  const lnk = D.links;
+  const items = [];
+  if(lnk.email) items.push({ico:'✉️',lbl:'Email',val:lnk.email,href:`mailto:${lnk.email}`});
+  if(lnk.phone) items.push({ico:'📱',lbl:'Phone',val:lnk.phone,href:`tel:${lnk.phone}`});
+  if(lnk.github) items.push({ico:'🐙',lbl:'GitHub',val:lnk.github.replace('https://',''),href:lnk.github});
+  if(lnk.linkedin) items.push({ico:'💼',lbl:'LinkedIn',val:lnk.linkedin.replace('https://',''),href:lnk.linkedin});
+  if(lnk.twitter) items.push({ico:'🐦',lbl:'Twitter',val:lnk.twitter.replace('https://',''),href:lnk.twitter});
+  if(lnk.location) items.push({ico:'📍',lbl:'Location',val:lnk.location,href:null});
+  document.getElementById('contactEl').innerHTML = items.map(c => `
+    <${c.href?`a href="${c.href}" ${c.href.startsWith('http')?'target="_blank"':''}` :'div'} class="contact-card">
+      <span class="cc-icon">${c.ico}</span>
+      <div><div class="cc-lbl">${c.lbl}</div><div class="cc-val">${c.val}</div></div>
+    </${c.href?'a':'div'}>`).join('');
+}
+
+function renderFooter() {
+  document.getElementById('footBrand').textContent = D.p.footBrand || 'Mohamed Ahmed';
+  document.getElementById('footCopy').textContent = D.p.footCopy || '';
+  let s = '';
+  if(D.links.github) s += `<a href="${D.links.github}" target="_blank" class="foot-soc-btn">🐙</a>`;
+  if(D.links.linkedin) s += `<a href="${D.links.linkedin}" target="_blank" class="foot-soc-btn">💼</a>`;
+  if(D.links.twitter) s += `<a href="${D.links.twitter}" target="_blank" class="foot-soc-btn">🐦</a>`;
+  document.getElementById('footSocial').innerHTML = s;
+}
+
+// ═══════════════════════════════════
+// BACKGROUND
+// ═══════════════════════════════════
+
+// ═══ PER-SECTION BACKGROUNDS ═══════════════════════════════════
+const BG_SECTIONS = [
+  {id:'hero',    label:'Hero (Home)'},
+  {id:'about',   label:'About'},
+  {id:'skills',  label:'Skills'},
+  {id:'projects',label:'Projects'},
+  {id:'education',label:'Education'},
+  {id:'experience',label:'Experience'},
+  {id:'volunteering',label:'Volunteering'},
+  {id:'certifications',label:'Certifications'},
+  {id:'awards',  label:'Awards'},
+  {id:'research',label:'Research'},
+  {id:'hobbies', label:'Hobbies'},
+  {id:'contact', label:'Contact'},
+];
+
+function renderSecBgGrid() {
+  const grid = document.getElementById('secBgGrid'); if(!grid) return;
+  grid.innerHTML = BG_SECTIONS.map(s => {
+    const img = (D.secBgImages||{})[s.id] || '';
+    const op  = (D.secBgOpacities||{})[s.id] ?? 0.18;
+    return `<div class="sec-bg-card">
+      <div class="sec-bg-thumb">${img ? `<img src="${img}" alt="${s.label}"/>` : 'No image'}</div>
+      <div>
+        <div class="sec-bg-label">${s.label}</div>
+        <div class="sec-bg-opacity">
+          <input type="range" min="0.05" max="0.6" step="0.01" value="${op}"
+            oninput="liveSecBgOpacity('${s.id}',this.value,this.nextElementSibling)"
+            onchange="saveSecBgOpacity('${s.id}',this.value)"/>
+          <span>${(+op).toFixed(2)}</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.4rem">
+        <div class="btn btn-outline btn-sm" style="position:relative;overflow:hidden;font-size:.72rem;text-align:center">
+          Upload<input type="file" accept="image/*" onchange="uploadSecBg('${s.id}',this)" style="position:absolute;inset:0;opacity:0;cursor:pointer"/>
+        </div>
+        ${img ? `<button class="abtn-del" onclick="removeSecBg('${s.id}')">Remove</button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function uploadSecBg(secId, inp) {
+  const f = inp.files[0]; if(!f) return;
+  if(f.size > 8*1024*1024) { showToast('Max 8MB','err'); return; }
+  const r = new FileReader();
+  r.onload = e => {
+    if(!D.secBgImages) D.secBgImages = {};
+    D.secBgImages[secId] = e.target.result;
+    if(!(D.secBgOpacities||{})[secId]) {
+      if(!D.secBgOpacities) D.secBgOpacities = {};
+      D.secBgOpacities[secId] = 0.18;
+    }
+    saveData('Background saved!');
+    renderSecBgGrid();
+    applyAllSecBgs();
+  };
+  r.readAsDataURL(f);
+}
+
+function removeSecBg(secId) {
+  if(D.secBgImages) delete D.secBgImages[secId];
+  if(D.secBgOpacities) delete D.secBgOpacities[secId];
+  saveData('Removed');
+  renderSecBgGrid();
+  applyAllSecBgs();
+}
+
+function liveSecBgOpacity(secId, val, label) {
+  if(label) label.textContent = (+val).toFixed(2);
+  const el = document.getElementById(secId);
+  if(el) el.style.setProperty('--sec-bg-opacity', val);
+}
+
+function saveSecBgOpacity(secId, val) {
+  if(!D.secBgOpacities) D.secBgOpacities = {};
+  D.secBgOpacities[secId] = parseFloat(val);
+  saveData('');
+}
+
+function applyAllSecBgs() {
+  const imgs = D.secBgImages || {};
+  const ops  = D.secBgOpacities || {};
+  BG_SECTIONS.forEach(s => {
+    const el = document.getElementById(s.id); if(!el) return;
+    const img = imgs[s.id];
+    const op  = ops[s.id] ?? 0.18;
+    if(img) {
+      el.setAttribute('data-bg', '1');
+      el.style.setProperty('--sec-bg-img', `url(${img})`);
+      el.style.setProperty('--sec-bg-opacity', op);
+    } else {
+      el.removeAttribute('data-bg');
+      el.style.removeProperty('--sec-bg-img');
+      el.style.removeProperty('--sec-bg-opacity');
+    }
+  });
+}
+
+let pendingBg = null;
+
+function uploadBg(inp) {
+  const file = inp.files[0]; if(!file) return;
+  if(file.size > 8*1024*1024) { showToast('File too large (max 8MB)','err'); return; }
+  const r = new FileReader();
+  r.onload = e => {
+    pendingBg = e.target.result;
+    const prev = document.getElementById('bgPreview');
+    prev.innerHTML = `<img src="${pendingBg}" style="width:100%;height:100%;object-fit:cover"/>`;
+    showToast('Image loaded — click Apply Background');
+  };
+  r.readAsDataURL(file);
+}
+
+function applyBg() {
+  if(!pendingBg && !D.bgImage) { showToast('No image selected','err'); return; }
+  if(pendingBg) D.bgImage = pendingBg;
+  applyBgOnLoad();
+  saveData('Background applied!');
+  pendingBg = null;
+}
+
+function applyBgOnLoad() {
+  if(D.bgImage) {
+    document.body.style.backgroundImage = `url(${D.bgImage})`;
+    document.body.classList.add('has-bg');
+    updateBgOpacity(D.bgOpacity || 0.82);
+    const prev = document.getElementById('bgPreview');
+    if(prev) prev.innerHTML = `<img src="${D.bgImage}" style="width:100%;height:100%;object-fit:cover"/>`;
+  }
+  applyAllSecBgs();
+}
+
+function removeBg() {
+  D.bgImage = null; pendingBg = null;
+  document.body.style.backgroundImage = '';
+  document.body.classList.remove('has-bg');
+  document.getElementById('bgPreview').innerHTML = 'No background image set';
+  saveData('Background removed');
+}
+
+function updateBgOpacity(val) {
+  D.bgOpacity = parseFloat(val);
+  document.getElementById('bgOpVal').textContent = parseFloat(val).toFixed(2);
+  const style = document.querySelector('style') || document.createElement('style');
+  let css = `body.has-bg::before { background: rgba(8,10,20,${val}) !important; }`;
+  // inject dynamic style
+  let dynStyle = document.getElementById('dynStyle');
+  if(!dynStyle) { dynStyle = document.createElement('style'); dynStyle.id='dynStyle'; document.head.appendChild(dynStyle); }
+  dynStyle.textContent = css;
+}
+
+// ═══════════════════════════════════
+// PROJECT DETAIL
+// ═══════════════════════════════════
+function openPD(id) {
+  const p = D.projects.find(x=>x.id===id); if(!p) return;
+  document.getElementById('pdContent').innerHTML = `
+    <div class="pd-hero">
+      ${p.img ? `<img src="${p.img}" alt="${p.title}"/>` : `<span>${p.emoji||'💻'}</span>`}
+      <div class="pd-hero-ovl"></div>
+    </div>
+    <div class="pd-inner">
+      <div style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem">${(p.tech||[]).map(t=>`<span class="proj-tag">${t}</span>`).join('')}</div>
+      <h1 style="font-family:var(--serif);font-size:2.5rem;letter-spacing:-.03em;margin-bottom:.7rem;line-height:1.1">${p.title}</h1>
+      <p style="font-size:.95rem;color:var(--t2);line-height:1.88;margin-bottom:2rem">${p.full||p.short}</p>
+      ${p.problem?`<div style="margin-bottom:1.5rem"><h3 style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.5rem;color:var(--t1)">The Problem</h3><p style="font-size:.9rem;color:var(--t2);line-height:1.8">${p.problem}</p></div>`:''}
+      ${p.solution?`<div style="margin-bottom:2rem"><h3 style="font-family:var(--serif);font-size:1.1rem;margin-bottom:.5rem;color:var(--t1)">The Solution</h3><p style="font-size:.9rem;color:var(--t2);line-height:1.8">${p.solution}</p></div>`:''}
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid var(--b1)">
+        ${p.github?`<a href="${p.github}" target="_blank" class="btn btn-outline">⭐ GitHub</a>`:''}
+        ${p.demo?`<a href="${p.demo}" target="_blank" class="btn btn-gold">🚀 Live Demo</a>`:''}
+      </div>
+    </div>`;
+  document.getElementById('projDetail').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('projDetail').scrollTo(0,0);
+}
+// Intercept main nav clicks when project detail is open
+document.addEventListener('click', function(e) {
+  const a = e.target.closest('.nav-links a[data-sec]');
+  if(!a) return;
+  const pd = document.getElementById('projDetail');
+  if(!pd.classList.contains('open')) return;
+  e.preventDefault();
+  const sec = a.getAttribute('data-sec');
+  closePDGoTo(sec);
+});
+
+function closePD() {
+  document.getElementById('projDetail').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closePDGoTo(sectionId) {
+  closePD();
+  setTimeout(() => {
+    const el = document.getElementById(sectionId);
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 60);
+}
+
+// ═══════════════════════════════════
+// CERT MODAL
+// ═══════════════════════════════════
+function openCertModal(id) {
+  const c = D.certifications.find(x=>x.id===id); if(!c) return;
+  document.getElementById('certModalBody').innerHTML = `
+    <div class="modal-img">${c.img?`<img src="${c.img}" alt="${c.title}"/>`:`<span>${c.ico||'🎓'}</span>`}</div>
+    <h3 style="font-family:var(--serif);font-size:1.4rem;margin-bottom:.2rem">${c.title}</h3>
+    <div style="font-size:.78rem;color:var(--t3);margin-bottom:.75rem">${c.iss} · Issued ${c.date}</div>
+    <p style="font-size:.87rem;color:var(--t2);line-height:1.75;margin-bottom:1.2rem">${c.desc}</p>
+    <div style="display:flex;gap:.6rem">
+      ${c.url?`<a href="${c.url}" target="_blank" class="btn btn-outline" style="flex:1;justify-content:center">Verify ↗</a>`:''}
+      <button class="btn btn-gold" style="flex:1;justify-content:center" onclick="closeCertModal()">Close</button>
+    </div>`;
+  document.getElementById('certModal').classList.add('open');
+}
+function closeCertModal(e) { if(e && e.target !== document.getElementById('certModal')) return; document.getElementById('certModal').classList.remove('open'); }
+
+// ═══════════════════════════════════
+// CONTACT FORM
+// ═══════════════════════════════════
+function submitContact(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  btn.textContent = 'Sending…'; btn.disabled = true;
+  const fields = e.target.querySelectorAll('input,textarea');
+  const msg = {id:Date.now(),from:((fields[0]?.value||'')+' '+(fields[1]?.value||'')).trim()||'Anonymous',email:fields[2]?.value?.trim()||'',subject:fields[3]?.value?.trim()||'',body:fields[4]?.value?.trim()||'',read:false,time:new Date().toLocaleString()};
+  setTimeout(() => {
+    if(!D.messages) D.messages=[];
+    D.messages.unshift(msg); saveData(''); updateMsgBadge();
+    document.getElementById('formOk').style.display = 'block';
+    btn.textContent = 'Send Message →'; btn.disabled = false;
+    e.target.reset();
+  }, 1200);
+}
+
+function doCV() {
+  if(!D.cv.data) { showToast('No CV uploaded yet — go to Admin → CV Upload','err'); return; }
+  const a = document.createElement('a');
+  a.href = D.cv.data; a.download = D.cv.fname || 'CV.pdf'; a.click();
+}
+
+// ═══════════════════════════════════
+// ADMIN: LOGIN
+// ═══════════════════════════════════
+function showLogin() {
+  document.getElementById('adminOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('pwInput').focus(), 100);
+}
+function closeLoginIfOutside(e) {
+  if(e.target === document.getElementById('adminOverlay')) {
+    document.getElementById('adminOverlay').classList.remove('open');
+  }
+}
+let _failCount=0,_lockUntil=0;
+function _hash(s){let h=0;for(let i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}return h.toString(36);}
+function _storedPw(){return localStorage.getItem('pf_pw_h')||_hash('admin123');}
+function doLogin() {
+  const now=Date.now();
+  if(_lockUntil>now){const r=Math.ceil((_lockUntil-now)/1000);const e=document.getElementById('loginErr');e.textContent='Locked. Try again in '+r+'s.';e.style.display='block';return;}
+  const pw=document.getElementById('pwInput').value;
+  const err=document.getElementById('loginErr');
+  if(_hash(pw)===_storedPw()){
+    _failCount=0;document.getElementById('adminOverlay').classList.remove('open');
+    document.getElementById('pwInput').value='';err.style.display='none';err.textContent='Incorrect password.';openAdmin();
+  } else {
+    _failCount++;err.textContent='Incorrect password. Try again.';err.style.display='block';
+    document.getElementById('pwInput').value='';document.getElementById('pwInput').focus();
+    if(_failCount>=5){_lockUntil=Date.now()+60000;_failCount=0;err.textContent='Too many attempts. Locked for 60 seconds.';}
+  }
+}
+
+// ═══════════════════════════════════
+// ADMIN: SHELL
+// ═══════════════════════════════════
+const admMeta = {
+  overview:{t:'Dashboard',s:'Portfolio overview & quick stats'},
+  profile:{t:'Profile & Hero',s:'Edit name, bio, hero section'},
+  links:{t:'Links & Navigation',s:'Edit social links and contact info'},
+  media:{t:'Photo & Media',s:'Upload profile photo and project images'},
+  background:{t:'Backgrounds',s:'Global background + per-section backgrounds'},
+  skills:{t:'Skills Manager',s:'Add, edit, and remove skills'},
+  projects:{t:'Projects Manager',s:'Manage portfolio projects'},
+  education:{t:'Education',s:'Schools & universities with logos'},
+  experience:{t:'Experience Timeline',s:'Edit career history'},
+  volunteering:{t:'Volunteering',s:'Community work and initiatives'},
+  fonts:{t:'Fonts & Colors',s:'Accent color and heading font'},
+  secphotos:{t:'Section Photos',s:'Banner image for each section'},
+  messages:{t:'Messages',s:'Contact form submissions'},
+  security:{t:'Security',s:'Change admin password'},
+  certifications:{t:'Certifications',s:'Manage credentials'},
+  awards:{t:'Awards & Recognition',s:'Highlight achievements'},
+  research:{t:'Research & Publications',s:'Academic work'},
+  hobbies:{t:'Interests & Hobbies',s:'Personal interests'},
+  events:{t:'Events',s:'Conferences, competitions & campus events'},
+
+  cv:{t:'CV / Resume Upload',s:'Upload and configure your CV'},
+};
+
+function openAdmin() {
+  document.getElementById('adminShell').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  populateForms();
+  renderTables();
+  renderStats();
+  renderMessages();
+  updateMsgBadge();
+  renderSecBgGrid();
+  applyThemeSettings();
+  setTimeout(()=>{const p=document.getElementById('accentPicker');if(p)p.value=D.accentColor||'#e8b86d';},50);
+}
+function closeAdmin() {
+  document.getElementById('adminShell').classList.remove('open');
+  document.body.style.overflow = '';
+  renderAll();
+}
+
+function admNav(el, panel) {
+  closeAdmSidebar();
+  document.querySelectorAll('.adm-item').forEach(x => x.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.adm-panel').forEach(x => x.classList.remove('active'));
+  document.getElementById('ap-' + panel).classList.add('active');
+  const m = admMeta[panel] || {t:panel,s:''};
+  document.getElementById('admTitle').textContent = m.t;
+  document.getElementById('admSub').textContent = m.s;
+  if(panel==='messages') renderMessages();
+  if(panel==='secphotos') renderSecPhotoGrid();
+}
+
+function renderStats() {
+  const unread=(D.messages||[]).filter(m=>!m.read).length;
+  document.getElementById('admStats').innerHTML = [
+    {n:D.projects.length,l:'Projects'},
+    {n:D.skills.length,l:'Skills'},
+    {n:D.certifications.length,l:'Certs'},
+    {n:D.awards.length,l:'Awards'},
+    {n:unread,l:'Unread Msgs'},
+  ].map(s=>`<div class="stat-card"><div class="stat-num">${s.n}</div><div class="stat-lbl">${s.l}</div></div>`).join('');
+}
+
+function sv(id, val) { const el = document.getElementById(id); if(el) el.value = val||''; }
+
+function populateForms() {
+  const p=D.p, lnk=D.links, n=D.nav, cv=D.cv;
+  sv('pf-name',p.name); sv('pf-role',p.role); sv('pf-desc',p.desc);
+  sv('pf-badge',p.badge); sv('pf-btn1',p.btn1); sv('pf-btn2',p.btn2);
+  sv('pf-twphrases',(p.twPhrases||[]).join('\n'));
+  sv('pf-ahead',p.ahead.replace(/<[^>]+>/g,'')); sv('pf-bio1',p.bio1); sv('pf-bio2',p.bio2);
+  sv('pf-loc',p.location); sv('pf-status',p.status);
+  sv('pf-fbrand',p.footBrand); sv('pf-fcopy',p.footCopy);
+  tagState.ftags = [...(p.ftags||[])]; renderTagPills('ftagWrap','ftagInp','ftags');
+  sv('lnk-logo',n.name); sv('lnk-badge',n.badge);
+  sv('lnk-email',lnk.email); sv('lnk-phone',lnk.phone);
+  sv('lnk-gh',lnk.github); sv('lnk-li',lnk.linkedin);
+  sv('lnk-tw',lnk.twitter); sv('lnk-loc2',lnk.location);
+  sv('cv-lbl',cv.label); sv('cv-fname',cv.fname);
+  if(cv.data) document.getElementById('cvStatus').innerHTML = `<span style="color:var(--teal)">✅ CV uploaded: ${cv.fname}</span>`;
+  if(D.profilePhoto) {
+    document.getElementById('profRingInner').innerHTML = `<img src="${D.profilePhoto}" alt="Profile"/>`;
+  }
+  if(D.bgImage) {
+    document.getElementById('bgPreview').innerHTML = `<img src="${D.bgImage}" style="width:100%;height:100%;object-fit:cover"/>`;
+  }
+  const opEl = document.getElementById('bgOpacity');
+  if(opEl) { opEl.value = D.bgOpacity||0.82; document.getElementById('bgOpVal').textContent = (D.bgOpacity||0.82).toFixed(2); }
+  renderImgGrid();
+}
+
+// ═══════════════════════════════════
+// TAG INPUT
+// ═══════════════════════════════════
+function tagKey(e, stateKey, wrapId, inpId) {
+  if(e.key==='Enter'||e.key===',') {
+    e.preventDefault();
+    const inp = document.getElementById(inpId);
+    const val = inp.value.trim().replace(/,$/,'');
+    if(!val) return;
+    tagState[stateKey].push(val);
+    inp.value = '';
+    renderTagPills(wrapId, inpId, stateKey);
+    if(stateKey==='ftags') { D.p.ftags=[...tagState.ftags]; renderAbout(); }
+  } else if(e.key==='Backspace' && !document.getElementById(inpId).value && tagState[stateKey].length) {
+    tagState[stateKey].pop();
+    renderTagPills(wrapId, inpId, stateKey);
+    if(stateKey==='ftags') { D.p.ftags=[...tagState.ftags]; renderAbout(); }
+  }
+}
+function renderTagPills(wrapId, inpId, stateKey) {
+  const wrap = document.getElementById(wrapId);
+  const inp = document.getElementById(inpId);
+  const pills = tagState[stateKey].map((t,i) =>
+    `<span class="tag-pill">${t}<button onclick="removeTag('${stateKey}','${wrapId}','${inpId}',${i})">×</button></span>`
+  ).join('');
+  wrap.innerHTML = pills + `<input class="tag-bare-input" id="${inpId}" placeholder="Add tag…" onkeydown="tagKey(event,'${stateKey}','${wrapId}','${inpId}')"/>`;
+}
+function removeTag(stateKey, wrapId, inpId, idx) {
+  tagState[stateKey].splice(idx,1);
+  renderTagPills(wrapId, inpId, stateKey);
+  if(stateKey==='ftags') { D.p.ftags=[...tagState.ftags]; renderAbout(); }
+}
+
+// ═══════════════════════════════════
+// SAVE HANDLERS
+// ═══════════════════════════════════
+function saveProfile() {
+  const ahead = document.getElementById('pf-ahead').value;
+  D.p.ahead = ahead.includes('<em>') ? ahead : ahead;
+  saveData('Profile saved!');
+  renderHero(); renderAbout();
+}
+function saveLinks() {
+  D.links = {
+    email: document.getElementById('lnk-email').value,
+    phone: document.getElementById('lnk-phone').value,
+    github: document.getElementById('lnk-gh').value,
+    linkedin: document.getElementById('lnk-li').value,
+    twitter: document.getElementById('lnk-tw').value,
+    location: document.getElementById('lnk-loc2').value,
+  };
+  D.nav = { name: document.getElementById('lnk-logo').value, badge: document.getElementById('lnk-badge').value };
+  saveData('Links saved!'); renderContact(); renderFooter(); renderNav();
+}
+function saveCVSettings() {
+  D.cv.fname = document.getElementById('cv-fname').value;
+  saveData('CV settings saved!'); renderHero();
+}
+
+// ═══════════════════════════════════
+// PHOTO UPLOAD
+// ═══════════════════════════════════
+function uploadProfilePhoto(inp) {
+  const file = inp.files[0]; if(!file) return;
+  if(file.size > 5*1024*1024) { showToast('File too large (max 5MB)','err'); return; }
+  const r = new FileReader();
+  r.onload = e => {
+    D.profilePhoto = e.target.result;
+    document.getElementById('profRingInner').innerHTML = `<img src="${D.profilePhoto}" alt="Profile"/>`;
+    document.getElementById('profileCircle').innerHTML = `<img src="${D.profilePhoto}" alt="Profile"/>`;
+    saveData('Profile photo uploaded!');
+  };
+  r.readAsDataURL(file);
+}
+
+function uploadImages(inp) {
+  const files = Array.from(inp.files);
+  let done = 0;
+  files.forEach(file => {
+    if(file.size > 5*1024*1024) { showToast('A file is too large (max 5MB)','err'); return; }
+    const r = new FileReader();
+    r.onload = e => {
+      D.images.push({ name: file.name, data: e.target.result });
+      done++;
+      if(done===files.length) { renderImgGrid(); saveData(`${files.length} image(s) uploaded!`); }
+    };
+    r.readAsDataURL(file);
+  });
+}
+
+function renderImgGrid() {
+  const grid = document.getElementById('imgGrid'); if(!grid) return;
+  grid.innerHTML = D.images.map((img,i) => `
+    <div class="img-thumb" onclick="copyImgUrl(${i})" title="Click to copy URL">
+      <img src="${img.data}" alt="${img.name}"/>
+      <div class="img-thumb-copy">📋 Copy URL</div>
+    </div>`).join('');
+}
+
+function copyImgUrl(i) {
+  const url = D.images[i].data;
+  navigator.clipboard.writeText(url).then(() => showToast('URL copied to clipboard!')).catch(() => showToast('Copy failed','err'));
+}
+
+function uploadCV(inp) {
+  const file = inp.files[0]; if(!file) return;
+  if(file.size > 5*1024*1024) { showToast('File too large (max 5MB)','err'); return; }
+  const r = new FileReader();
+  r.onload = e => {
+    D.cv.data = e.target.result;
+    D.cv.fname = file.name;
+    document.getElementById('cv-fname').value = file.name;
+    document.getElementById('cvStatus').innerHTML = `<span style="color:var(--teal)">✅ CV uploaded: ${file.name}</span>`;
+    saveData('CV uploaded!'); renderHero();
+  };
+  r.readAsDataURL(file);
+}
+
+// ═══════════════════════════════════
+// CRUD: SKILLS
+// ═══════════════════════════════════
+function saveSkill() {
+  const name=document.getElementById('sk-name').value.trim();
+  if(!name){showToast('Name required','err');return;}
+  const eid=document.getElementById('sk-eid').value;
+  const obj={id:eid?+eid:Date.now(),name,cat:document.getElementById('sk-cat').value,ico:document.getElementById('sk-ico').value,lvl:+document.getElementById('sk-lvl').value||4};
+  if(eid){const i=D.skills.findIndex(x=>x.id===+eid);if(i>-1)D.skills[i]=obj;}else D.skills.push(obj);
+  saveData(eid?'Skill updated!':'Skill added!'); cancelSkill(); renderTables(); renderStats();
+}
+function cancelSkill(){
+  document.getElementById('sk-name').value='';document.getElementById('sk-ico').value='';document.getElementById('sk-lvl').value=4;document.getElementById('sk-eid').value='';
+  document.getElementById('skTitle').textContent='Add Skill';
+}
+function editSkill(id){
+  const s=D.skills.find(x=>x.id===id);if(!s)return;
+  document.getElementById('sk-name').value=s.name;document.getElementById('sk-cat').value=s.cat;
+  document.getElementById('sk-ico').value=s.ico;document.getElementById('sk-lvl').value=s.lvl;
+  document.getElementById('sk-eid').value=s.id;document.getElementById('skTitle').textContent='Edit Skill';
+  document.getElementById('ap-skills').scrollTo?document.getElementById('ap-skills').scrollTop=0:null;
+}
+function deleteSkill(id){if(!confirm('Delete this skill?'))return;D.skills=D.skills.filter(x=>x.id!==id);saveData('Deleted');renderTables();renderStats();}
+
+// ═══════════════════════════════════
+// CRUD: PROJECTS
+// ═══════════════════════════════════
+function saveProject(){
+  const title=document.getElementById('pj-title').value.trim();if(!title){showToast('Title required','err');return;}
+  const eid=document.getElementById('pj-eid').value;
+  const obj={id:eid?+eid:Date.now(),emoji:document.getElementById('pj-emoji').value,title,short:document.getElementById('pj-short').value,full:document.getElementById('pj-full').value,problem:document.getElementById('pj-prob').value,solution:document.getElementById('pj-sol').value,tech:[...tagState.techTags],github:document.getElementById('pj-gh').value,demo:document.getElementById('pj-demo').value,img:document.getElementById('pj-img').value};
+  if(eid){const i=D.projects.findIndex(x=>x.id===+eid);if(i>-1)D.projects[i]=obj;}else D.projects.push(obj);
+  saveData(eid?'Project updated!':'Project added!'); cancelProject(); renderTables(); renderStats();
+}
+function cancelProject(){
+  ['pj-title','pj-emoji','pj-short','pj-full','pj-prob','pj-sol','pj-gh','pj-demo','pj-img','pj-eid'].forEach(id=>document.getElementById(id).value='');
+  tagState.techTags=[]; renderTagPills('techWrap','techInp','techTags');
+  document.getElementById('pjTitle').textContent='Add Project';
+}
+function editProject(id){
+  const p=D.projects.find(x=>x.id===id);if(!p)return;
+  document.getElementById('pj-title').value=p.title;document.getElementById('pj-emoji').value=p.emoji;
+  document.getElementById('pj-short').value=p.short;document.getElementById('pj-full').value=p.full;
+  document.getElementById('pj-prob').value=p.problem;document.getElementById('pj-sol').value=p.solution;
+  document.getElementById('pj-gh').value=p.github;document.getElementById('pj-demo').value=p.demo;
+  document.getElementById('pj-img').value=p.img;document.getElementById('pj-eid').value=p.id;
+  tagState.techTags=[...(p.tech||[])]; renderTagPills('techWrap','techInp','techTags');
+  document.getElementById('pjTitle').textContent='Edit Project';
+}
+function deleteProject(id){if(!confirm('Delete project?'))return;D.projects=D.projects.filter(x=>x.id!==id);saveData('Deleted');renderTables();renderStats();}
+
+// ═══════════════════════════════════
+// CRUD: EXPERIENCE
+// ═══════════════════════════════════
+function saveExp(){
+  const role=document.getElementById('ex-role').value.trim();if(!role){showToast('Role required','err');return;}
+  const eid=document.getElementById('ex-eid').value;
+  const obj={id:eid?+eid:Date.now(),role,org:document.getElementById('ex-org').value,start:document.getElementById('ex-start').value,end:document.getElementById('ex-end').value,desc:document.getElementById('ex-desc').value};
+  if(eid){const i=D.experience.findIndex(x=>x.id===+eid);if(i>-1)D.experience[i]=obj;}else D.experience.push(obj);
+  saveData(eid?'Updated!':'Added!'); cancelExp(); renderTables();
+}
+function cancelExp(){['ex-role','ex-org','ex-start','ex-end','ex-desc','ex-eid'].forEach(id=>document.getElementById(id).value='');document.getElementById('expTitle').textContent='Add Experience';}
+function editExp(id){const e=D.experience.find(x=>x.id===id);if(!e)return;document.getElementById('ex-role').value=e.role;document.getElementById('ex-org').value=e.org;document.getElementById('ex-start').value=e.start;document.getElementById('ex-end').value=e.end;document.getElementById('ex-desc').value=e.desc;document.getElementById('ex-eid').value=e.id;document.getElementById('expTitle').textContent='Edit Experience';}
+function deleteExp(id){if(!confirm('Delete?'))return;D.experience=D.experience.filter(x=>x.id!==id);saveData('Deleted');renderTables();}
+
+// ═══════════════════════════════════
+// CRUD: CERTIFICATIONS
+// ═══════════════════════════════════
+function saveCert(){
+  const title=document.getElementById('ct-title').value.trim();if(!title){showToast('Title required','err');return;}
+  const eid=document.getElementById('ct-eid').value;
+  const obj={id:eid?+eid:Date.now(),title,iss:document.getElementById('ct-iss').value,date:document.getElementById('ct-date').value,ico:document.getElementById('ct-ico').value,desc:document.getElementById('ct-desc').value,url:document.getElementById('ct-url').value,img:document.getElementById('ct-img').value};
+  if(eid){const i=D.certifications.findIndex(x=>x.id===+eid);if(i>-1)D.certifications[i]=obj;}else D.certifications.push(obj);
+  saveData(eid?'Updated!':'Added!'); cancelCert(); renderTables(); renderStats();
+}
+function cancelCert(){['ct-title','ct-iss','ct-date','ct-ico','ct-desc','ct-url','ct-img','ct-eid'].forEach(id=>document.getElementById(id).value='');document.getElementById('ctTitle').textContent='Add Certification';}
+function editCert(id){const c=D.certifications.find(x=>x.id===id);if(!c)return;document.getElementById('ct-title').value=c.title;document.getElementById('ct-iss').value=c.iss;document.getElementById('ct-date').value=c.date;document.getElementById('ct-ico').value=c.ico;document.getElementById('ct-desc').value=c.desc;document.getElementById('ct-url').value=c.url;document.getElementById('ct-img').value=c.img;document.getElementById('ct-eid').value=c.id;document.getElementById('ctTitle').textContent='Edit Certification';}
+function deleteCert(id){if(!confirm('Delete?'))return;D.certifications=D.certifications.filter(x=>x.id!==id);saveData('Deleted');renderTables();renderStats();}
+
+// ═══════════════════════════════════
+// CRUD: AWARDS
+// ═══════════════════════════════════
+function saveAward(){
+  const title=document.getElementById('aw-title').value.trim();if(!title){showToast('Title required','err');return;}
+  const eid=document.getElementById('aw-eid').value;
+  const obj={id:eid?+eid:Date.now(),title,org:document.getElementById('aw-org').value,year:document.getElementById('aw-year').value,ico:document.getElementById('aw-ico').value,desc:document.getElementById('aw-desc').value};
+  if(eid){const i=D.awards.findIndex(x=>x.id===+eid);if(i>-1)D.awards[i]=obj;}else D.awards.push(obj);
+  saveData(eid?'Updated!':'Added!'); cancelAward(); renderTables(); renderStats();
+}
+function cancelAward(){['aw-title','aw-org','aw-year','aw-ico','aw-desc','aw-eid'].forEach(id=>document.getElementById(id).value='');document.getElementById('awTitle').textContent='Add Award';}
+function editAward(id){const a=D.awards.find(x=>x.id===id);if(!a)return;document.getElementById('aw-title').value=a.title;document.getElementById('aw-org').value=a.org;document.getElementById('aw-year').value=a.year;document.getElementById('aw-ico').value=a.ico;document.getElementById('aw-desc').value=a.desc;document.getElementById('aw-eid').value=a.id;document.getElementById('awTitle').textContent='Edit Award';}
+function deleteAward(id){if(!confirm('Delete?'))return;D.awards=D.awards.filter(x=>x.id!==id);saveData('Deleted');renderTables();renderStats();}
+
+// ═══════════════════════════════════
+// CRUD: RESEARCH
+// ═══════════════════════════════════
+function saveRes(){
+  const title=document.getElementById('re-title').value.trim();if(!title){showToast('Title required','err');return;}
+  const eid=document.getElementById('re-eid').value;
+  const obj={id:eid?+eid:Date.now(),title,abs:document.getElementById('re-abs').value,link:document.getElementById('re-link').value,year:document.getElementById('re-year').value};
+  if(eid){const i=D.research.findIndex(x=>x.id===+eid);if(i>-1)D.research[i]=obj;}else D.research.push(obj);
+  saveData(eid?'Updated!':'Added!'); cancelRes(); renderTables();
+}
+function cancelRes(){['re-title','re-abs','re-link','re-year','re-eid'].forEach(id=>document.getElementById(id).value='');document.getElementById('reTitle').textContent='Add Research';}
+function editRes(id){const r=D.research.find(x=>x.id===id);if(!r)return;document.getElementById('re-title').value=r.title;document.getElementById('re-abs').value=r.abs;document.getElementById('re-link').value=r.link;document.getElementById('re-year').value=r.year;document.getElementById('re-eid').value=r.id;document.getElementById('reTitle').textContent='Edit Research';}
+function deleteRes(id){if(!confirm('Delete?'))return;D.research=D.research.filter(x=>x.id!==id);saveData('Deleted');renderTables();}
+
+// ═══════════════════════════════════
+// CRUD: HOBBIES
+// ═══════════════════════════════════
+function addHobby(){
+  const name=document.getElementById('hb-name').value.trim();if(!name){showToast('Name required','err');return;}
+  D.hobbies.push({id:Date.now(),ico:document.getElementById('hb-ico').value||'🎯',name});
+  document.getElementById('hb-name').value='';document.getElementById('hb-ico').value='';
+  saveData('Hobby added!'); renderTables(); renderStats();
+}
+function deleteHobby(id){D.hobbies=D.hobbies.filter(x=>x.id!==id);saveData('Deleted');renderTables();renderStats();}
+
+// ═══════════════════════════════════
+// RENDER TABLES
+// ═══════════════════════════════════
+function renderTables() {
+  document.getElementById('skCount').textContent = `(${D.skills.length})`;
+  document.getElementById('skTbl').innerHTML = D.skills.map(s=>`<tr><td><strong>${s.ico||''} ${s.name}</strong></td><td>${s.cat}</td><td>${'★'.repeat(s.lvl)}${'☆'.repeat(5-s.lvl)}</td><td><div class="atable-actions"><button class="abtn-edit" onclick="editSkill(${s.id})">Edit</button><button class="abtn-del" onclick="deleteSkill(${s.id})">Delete</button></div></td></tr>`).join('');
+  document.getElementById('pjTbl').innerHTML = D.projects.map(p=>`<tr><td><strong>${p.emoji||''} ${p.title}</strong></td><td style="font-size:.75rem;color:var(--t3)">${(p.tech||[]).slice(0,3).join(', ')}</td><td><div class="atable-actions"><button class="abtn-edit" onclick="editProject(${p.id})">Edit</button><button class="abtn-del" onclick="deleteProject(${p.id})">Delete</button></div></td></tr>`).join('');
+  document.getElementById('eduTbl').innerHTML = (D.education||[]).map(e=>`<tr><td><strong>${e.school}</strong></td><td>${e.degree}</td><td style="font-size:.75rem">${e.start}–${e.end}</td><td style="font-size:.73rem;color:${e.status==='current'?'#2dd4bf':'var(--gold)'}">${e.status==='current'?'● Current':'✓ Done'}</td><td><div class="atable-actions"><button class="abtn-edit" onclick="editEdu(${e.id})">Edit</button><button class="abtn-del" onclick="deleteEdu(${e.id})">Delete</button></div></td></tr>`).join('');
+  document.getElementById('volTbl').innerHTML = (D.volunteering||[]).map(v=>`<tr><td><strong>${v.role}</strong></td><td>${v.org}</td><td style="font-size:.75rem">${v.start}–${v.end}</td><td><div class="atable-actions"><button class="abtn-edit" onclick="editVol(${v.id})">Edit</button><button class="abtn-del" onclick="deleteVol(${v.id})">Delete</button></div></td></tr>`).join('');
+  document.getElementById('expTbl').innerHTML = D.experience.map(e=>`<tr><td><strong>${e.role}</strong></td><td>${e.org}</td><td style="font-size:.75rem">${e.start}–${e.end}</td><td><div class="atable-actions"><button class="abtn-edit" onclick="editExp(${e.id})">Edit</button><button class="abtn-del" onclick="deleteExp(${e.id})">Delete</button></div></td></tr>`).join('');
+  document.getElementById('ctTbl').innerHTML = D.certifications.map(c=>`<tr><td><strong>${c.ico||''} ${c.title}</strong></td><td>${c.iss}</td><td>${c.date}</td><td><div class="atable-actions"><button class="abtn-edit" onclick="editCert(${c.id})">Edit</button><button class="abtn-del" onclick="deleteCert(${c.id})">Delete</button></div></td></tr>`).join('');
+  document.getElementById('awTbl').innerHTML = D.awards.map(a=>`<tr><td><strong>${a.ico||''} ${a.title}</strong></td><td>${a.org}</td><td>${a.year}</td><td><div class="atable-actions"><button class="abtn-edit" onclick="editAward(${a.id})">Edit</button><button class="abtn-del" onclick="deleteAward(${a.id})">Delete</button></div></td></tr>`).join('');
+  document.getElementById('reTbl').innerHTML = D.research.map(r=>`<tr><td><strong>${r.title}</strong></td><td>${r.year}</td><td><div class="atable-actions"><button class="abtn-edit" onclick="editRes(${r.id})">Edit</button><button class="abtn-del" onclick="deleteRes(${r.id})">Delete</button></div></td></tr>`).join('');
+  document.getElementById('hbTbl').innerHTML = D.hobbies.map(h=>`<tr><td style="font-size:1.3rem">${h.ico}</td><td><strong>${h.name}</strong></td><td><button class="abtn-del" onclick="deleteHobby(${h.id})">Delete</button></td></tr>`).join('');
+  if(document.getElementById('evTbl')) document.getElementById('evTbl').innerHTML = (D.events||[]).map(ev=>`<tr><td><strong>${ev.name}</strong></td><td style="font-size:.75rem">${ev.date}</td><td style="font-size:.75rem">${ev.loc}</td><td><div class="atable-actions"><button class="abtn-edit" onclick="editEvent(${ev.id})">Edit</button><button class="abtn-del" onclick="deleteEvent(${ev.id})">Delete</button></div></td></tr>`).join('');
+}
+
+// ═══════════════════════════════════
+// BOOT
+// ═══════════════════════════════════
+
+// ═══ EDUCATION ═══════════════════════════════════════════════
+function renderEdu() {
+  const el=document.getElementById('eduEl'); if(!el) return;
+  const edu=D.education||[];
+  if(!edu.length){el.innerHTML='<p style="color:var(--t3);text-align:center;padding:2rem">No education added yet.</p>';return;}
+  el.innerHTML=edu.map(e=>`
+    <div class="edu-card rv">
+      <div class="edu-logo">${e.logo?`<img src="${e.logo}" alt="${e.school}"/>`:'🏫'}</div>
+      <div>
+        <div class="edu-school">${e.school}</div>
+        <div class="edu-degree">${e.degree}</div>
+        <div class="edu-field">${e.field}</div>
+        <div class="edu-meta">
+          <span class="edu-period">${e.start} – ${e.end}</span>
+          <span class="edu-status ${e.status}">${e.status==='current'?'● In Progress':'✓ Completed'}</span>
+          ${e.loc?`<span style="font-size:.68rem;color:var(--t3)">📍 ${e.loc}</span>`:''}
+        </div>
+        ${e.gpa?`<div style="font-size:.73rem;color:var(--t3);margin-top:.38rem">GPA: ${e.gpa}</div>`:''}
+        ${e.desc?`<p style="font-size:.81rem;color:var(--t2);line-height:1.7;margin-top:.5rem">${e.desc}</p>`:''}
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('#eduEl .rv').forEach(el=>{new IntersectionObserver(([en])=>{if(en.isIntersecting)el.classList.add('in');},{threshold:.1}).observe(el);});
+}
+function uploadEduLogo(inp){const f=inp.files[0];if(!f)return;if(f.size>3*1024*1024){showToast('Max 3MB','err');return;}const r=new FileReader();r.onload=e=>{document.getElementById('ed-logo').value=e.target.result;document.getElementById('edLogoPreview').innerHTML=`<img src="${e.target.result}" style="width:100%;height:100%;object-fit:contain;padding:6px"/>`;};r.readAsDataURL(f);}
+function clearEduLogo(){document.getElementById('ed-logo').value='';document.getElementById('edLogoPreview').innerHTML='🏫';}
+function saveEdu(){
+  const eid=document.getElementById('ed-eid').value;
+  const obj={id:eid?+eid:Date.now(),school:document.getElementById('ed-school').value.trim(),degree:document.getElementById('ed-degree').value.trim(),field:document.getElementById('ed-field').value.trim(),start:document.getElementById('ed-start').value.trim(),end:document.getElementById('ed-end').value.trim(),status:document.getElementById('ed-status').value,gpa:document.getElementById('ed-gpa').value.trim(),loc:document.getElementById('ed-loc').value.trim(),desc:document.getElementById('ed-desc').value.trim(),logo:document.getElementById('ed-logo').value};
+  if(!obj.school){showToast('School name required','err');return;}
+  if(!D.education)D.education=[];
+  if(eid){const i=D.education.findIndex(x=>x.id===+eid);if(i>-1)D.education[i]=obj;}else D.education.push(obj);
+  saveData(eid?'Updated!':'Added!');cancelEdu();renderTables();renderEdu();
+}
+function editEdu(id){const e=(D.education||[]).find(x=>x.id===id);if(!e)return;['school','degree','field','start','end','gpa','loc','desc'].forEach(f=>document.getElementById('ed-'+f).value=e[f]||'');document.getElementById('ed-status').value=e.status;document.getElementById('ed-logo').value=e.logo||'';document.getElementById('edLogoPreview').innerHTML=e.logo?`<img src="${e.logo}" style="width:100%;height:100%;object-fit:contain;padding:6px"/>` :'🏫';document.getElementById('ed-eid').value=e.id;document.getElementById('eduFormTitle').textContent='Edit Education';}
+function cancelEdu(){['school','degree','field','start','end','gpa','loc','desc','eid','logo'].forEach(f=>document.getElementById('ed-'+f).value='');document.getElementById('ed-status').value='current';document.getElementById('edLogoPreview').innerHTML='🏫';document.getElementById('eduFormTitle').textContent='Add Education';}
+function deleteEdu(id){if(!confirm('Delete?'))return;D.education=(D.education||[]).filter(x=>x.id!==id);saveData('Deleted');renderTables();renderEdu();}
+
+// ═══ VOLUNTEERING ═════════════════════════════════════════════
+function renderVol(){
+  const el=document.getElementById('volEl');if(!el)return;
+  const vol=D.volunteering||[];
+  if(!vol.length){el.innerHTML='<p style="color:var(--t3);text-align:center;padding:2rem">No volunteering added yet.</p>';return;}
+  el.innerHTML=vol.map(v=>`
+    <div class="vol-card rv">
+      <div class="vol-icon">${v.ico||'🤝'}</div>
+      <div><div class="vol-role">${v.role}</div><div class="vol-org">${v.org}</div><div class="vol-period">${v.start} – ${v.end}</div><div class="vol-desc">${v.desc}</div></div>
+    </div>`).join('');
+  document.querySelectorAll('#volEl .rv').forEach(el=>{new IntersectionObserver(([en])=>{if(en.isIntersecting)el.classList.add('in');},{threshold:.1}).observe(el);});
+}
+function saveVol(){const eid=document.getElementById('vl-eid').value;const obj={id:eid?+eid:Date.now(),role:document.getElementById('vl-role').value.trim(),org:document.getElementById('vl-org').value.trim(),ico:document.getElementById('vl-ico').value.trim()||'🤝',start:document.getElementById('vl-start').value.trim(),end:document.getElementById('vl-end').value.trim(),desc:document.getElementById('vl-desc').value.trim()};if(!obj.role){showToast('Role required','err');return;}if(!D.volunteering)D.volunteering=[];if(eid){const i=D.volunteering.findIndex(x=>x.id===+eid);if(i>-1)D.volunteering[i]=obj;}else D.volunteering.push(obj);saveData(eid?'Updated!':'Added!');cancelVol();renderTables();renderVol();}
+function editVol(id){const v=(D.volunteering||[]).find(x=>x.id===id);if(!v)return;document.getElementById('vl-role').value=v.role;document.getElementById('vl-org').value=v.org;document.getElementById('vl-ico').value=v.ico||'🤝';document.getElementById('vl-start').value=v.start;document.getElementById('vl-end').value=v.end;document.getElementById('vl-desc').value=v.desc||'';document.getElementById('vl-eid').value=v.id;document.getElementById('volFormTitle').textContent='Edit Volunteering';}
+function cancelVol(){['role','org','ico','start','end','desc','eid'].forEach(f=>document.getElementById('vl-'+f).value='');document.getElementById('volFormTitle').textContent='Add Volunteering';}
+function deleteVol(id){if(!confirm('Delete?'))return;D.volunteering=(D.volunteering||[]).filter(x=>x.id!==id);saveData('Deleted');renderTables();renderVol();}
+
+// ═══ SECTION PHOTOS ════════════════════════════════════════════
+const SEC_SECTIONS=[
+  {id:'about',ph:'aboutSecPhoto',label:'About'},
+  {id:'skills',ph:'skillsSecPhoto',label:'Skills'},
+  {id:'projects',ph:'projSecPhoto',label:'Projects'},
+  {id:'education',ph:'eduSecPhoto',label:'Education'},
+  {id:'experience',ph:'expSecPhoto',label:'Experience'},
+  {id:'volunteering',ph:'volSecPhoto',label:'Volunteering'},
+  {id:'certifications',ph:'certSecPhoto',label:'Certifications'},
+  {id:'awards',ph:'awardsSecPhoto',label:'Awards'},
+  {id:'research',ph:'resSecPhoto',label:'Research'},
+  {id:'hobbies',ph:'hobbiesSecPhoto',label:'Hobbies'},
+  {id:'events',ph:'eventsSecPhoto',label:'Events'},
+];
+function renderSecPhotoGrid(){
+  const grid=document.getElementById('secPhotoGrid');if(!grid)return;
+  grid.innerHTML=SEC_SECTIONS.map(s=>{
+    const img=(D.sectionBgs||{})[s.id]||'';
+    return `<div style="display:flex;align-items:center;gap:.85rem;padding:.75rem;background:var(--surf);border:1px solid var(--b1);border-radius:11px">
+      <div style="width:80px;height:54px;border-radius:8px;overflow:hidden;background:var(--surf2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--t3)">${img?`<img src="${img}" style="width:100%;height:100%;object-fit:cover"/>`:'No photo'}</div>
+      <div style="flex:1;min-width:0;font-size:.85rem;font-weight:600">${s.label}</div>
+      <div style="display:flex;gap:.4rem;flex-shrink:0">
+        <div class="btn btn-outline btn-sm" style="position:relative;overflow:hidden;font-size:.72rem">Upload<input type="file" accept="image/*" onchange="uploadSecPhoto('${s.id}',this)" style="position:absolute;inset:0;opacity:0;cursor:pointer"/></div>
+        ${img?`<button class="abtn-del" onclick="removeSecPhoto('${s.id}')">✕</button>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+function uploadSecPhoto(secId,inp){
+  const f=inp.files[0];if(!f)return;if(f.size>5*1024*1024){showToast('Max 5MB','err');return;}
+  const r=new FileReader();r.onload=e=>{if(!D.sectionBgs)D.sectionBgs={};D.sectionBgs[secId]=e.target.result;saveData('Photo saved!');renderSecPhotoGrid();applySecPhotos();};r.readAsDataURL(f);
+}
+function removeSecPhoto(secId){if(!D.sectionBgs)return;delete D.sectionBgs[secId];saveData('Removed');renderSecPhotoGrid();applySecPhotos();}
+function applySecPhotos(){
+  SEC_SECTIONS.forEach(s=>{
+    const img=(D.sectionBgs||{})[s.id]||'';
+    const ph=document.getElementById(s.ph);if(!ph)return;
+    ph.innerHTML=img?`<div class="sec-photo"><img src="${img}" alt="${s.label} banner"/><div class="sec-photo-ovl"></div></div>` :'';
+  });
+}
+
+// ═══ FONTS & COLORS ════════════════════════════════════════════
+function hexToRgba(hex,a){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return `rgba(${r},${g},${b},${a})`;}
+function liveAccent(val){
+  const rs=document.documentElement.style;
+  rs.setProperty('--gold',val);rs.setProperty('--gold2',val);
+  rs.setProperty('--gdim',hexToRgba(val,.1));rs.setProperty('--gbdr',hexToRgba(val,.28));
+}
+function setAccent(val){document.getElementById('accentPicker').value=val;liveAccent(val);}
+function saveAccent(){D.accentColor=document.getElementById('accentPicker').value;saveData('Color saved!');}
+function setFont(btn){
+  const font=btn.dataset.font;
+  document.documentElement.style.setProperty('--serif',font);
+  D.serifFont=font;saveData('Font saved!');
+  document.querySelectorAll('.font-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  const name=font.split(',')[0].replace(/'/g,'').trim();
+  const safe=['Playfair Display','Merriweather','Lora','Cormorant Garamond','Space Grotesk'];
+  if(safe.includes(name)){const id='gf-'+name.replace(/ /g,'-');if(!document.getElementById(id)){const l=document.createElement('link');l.id=id;l.rel='stylesheet';l.href=`https://fonts.googleapis.com/css2?family=${encodeURIComponent(name)}:wght@400;500;700&display=swap`;document.head.appendChild(l);}}
+}
+function applyThemeSettings(){
+  if(D.accentColor) liveAccent(D.accentColor);
+  if(D.serifFont) document.documentElement.style.setProperty('--serif',D.serifFont);
+  applySecPhotos();
+}
+
+// ═══ MESSAGES ══════════════════════════════════════════════════
+function updateMsgBadge(){const u=(D.messages||[]).filter(m=>!m.read).length;const b=document.getElementById('msgBadge');if(b){b.textContent=u;b.style.display=u?'':'none';}}
+function renderMessages(){
+  const msgs=D.messages||[];const u=msgs.filter(m=>!m.read).length;
+  const lbl=document.getElementById('msgCountLbl');if(lbl)lbl.textContent='('+msgs.length+' total, '+u+' unread)';
+  updateMsgBadge();
+  const el=document.getElementById('msgsContainer');if(!el)return;
+  if(!msgs.length){el.innerHTML='<p style="color:var(--t3);font-size:.83rem;text-align:center;padding:2.5rem">📭 No messages yet. They appear when someone submits the contact form.</p>';return;}
+  el.innerHTML=msgs.map(m=>`<div class="msg-card ${m.read?'':'unread'}">
+    <div class="msg-meta"><div class="msg-from">${!m.read?'<span class="msg-dot"></span>':''}<strong>${m.from}</strong></div><div class="msg-time">${m.time}</div></div>
+    <div class="msg-email">${m.email}</div><div class="msg-subject">Re: ${m.subject}</div><div class="msg-body">${m.body}</div>
+    <div class="msg-acts">
+      ${!m.read?`<button class="abtn-edit" onclick="markRead(${m.id})">✓ Mark Read</button>`:'<span style="font-size:.7rem;color:var(--t3)">✓ Read</span>'}
+      <a href="mailto:${m.email}?subject=Re: ${encodeURIComponent(m.subject)}" class="abtn-edit" style="text-decoration:none">↩ Reply</a>
+      <button class="abtn-del" onclick="delMsg(${m.id})">Delete</button>
+    </div></div>`).join('');
+}
+function markRead(id){const m=(D.messages||[]).find(x=>x.id===id);if(m){m.read=true;saveData('');renderMessages();}}
+function markAllRead(){(D.messages||[]).forEach(m=>m.read=true);saveData('All read');renderMessages();}
+function delMsg(id){if(!confirm('Delete?'))return;D.messages=(D.messages||[]).filter(x=>x.id!==id);saveData('Deleted');renderMessages();}
+
+// ═══ SECURITY ══════════════════════════════════════════════════
+function changePassword(){
+  const cur=document.getElementById('sec-cur').value,nw=document.getElementById('sec-new').value,cf=document.getElementById('sec-conf').value;
+  const err=document.getElementById('secErr');err.style.display='none';
+  if(_hash(cur)!==_storedPw()){err.textContent='Current password is wrong.';err.style.display='block';return;}
+  if(nw.length<6){err.textContent='Minimum 6 characters.';err.style.display='block';return;}
+  if(nw!==cf){err.textContent='Passwords do not match.';err.style.display='block';return;}
+  localStorage.setItem('pf_pw_h',_hash(nw));
+  ['sec-cur','sec-new','sec-conf'].forEach(id=>document.getElementById(id).value='');
+  showToast('Password changed!');
+}
+
+// ESC closes overlays
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    if(document.getElementById('projDetail').classList.contains('open'))closePD();
+    else if(document.getElementById('certModal').classList.contains('open'))document.getElementById('certModal').classList.remove('open');
+  }
+});
+
+
+// ── ADMIN MOBILE SIDEBAR ──────────────────────────────────
+function toggleAdmSidebar() {
+  const sb = document.querySelector('.adm-sidebar');
+  const ov = document.getElementById('admMobOverlay');
+  const open = sb.classList.toggle('mob-open');
+  ov.classList.toggle('show', open);
+}
+function closeAdmSidebar() {
+  document.querySelector('.adm-sidebar').classList.remove('mob-open');
+  document.getElementById('admMobOverlay').classList.remove('show');
+}
+
+
+// ══ INTERACTIVE ══════════════════════════════════════════════
+
+// scroll progress
+window.addEventListener('scroll',()=>{
+  const b=document.getElementById('scrollBar');if(!b)return;
+  const t=document.documentElement.scrollHeight-window.innerHeight;
+  b.style.width=(window.scrollY/t*100)+'%';
+},{passive:true});
+
+
+
+// hero particles
+(()=>{
+  const cv=document.getElementById('heroCanvas');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;}
+  resize();window.addEventListener('resize',resize,{passive:true});
+  for(let i=0;i<50;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.4,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,o:Math.random()*.4+.1});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(232,184,109,${p.o})`;ctx.fill();
+    });
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<85){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
+        ctx.strokeStyle=`rgba(232,184,109,${.1*(1-d/85)})`;ctx.lineWidth=.5;ctx.stroke();}
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// typewriter on hero role
+function initTypewriter(){
+  const el=document.getElementById('heroRole');if(!el)return;
+  const texts=(D.p&&D.p.twPhrases&&D.p.twPhrases.length)?D.p.twPhrases:[el.textContent.trim()];
+  el.innerHTML='<span id="twT"></span><span class="tw-cur"></span>';
+  const tw=document.getElementById('twT');
+  let ti=0,ci=0,del=false;
+  function tick(){
+    const full=texts[ti];
+    if(!del){ci++;tw.textContent=full.slice(0,ci);if(ci===full.length){del=true;setTimeout(tick,1900);return;}setTimeout(tick,52);}
+    else{ci--;tw.textContent=full.slice(0,ci);if(ci===0){del=false;ti=(ti+1)%texts.length;setTimeout(tick,380);return;}setTimeout(tick,26);}
+  }
+  setTimeout(tick,1100);
+}
+
+// skill bars animate
+function initSkillBars(){
+  document.querySelectorAll('.skill-fill').forEach(bar=>{
+    const w=bar.style.width;bar.style.width='0';
+    const obs=new IntersectionObserver(([en])=>{
+      if(en.isIntersecting){setTimeout(()=>bar.style.width=w,60);obs.unobserve(bar);}
+    },{threshold:.3});
+    obs.observe(bar);
+  });
+}
+
+// 3D tilt on project cards
+function initTilt(){
+  document.querySelectorAll('.proj-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(650px) rotateY(${x*7}deg) rotateX(${-y*7}deg) translateY(-3px)`;
+      const sh=card.querySelector('.proj-shine');
+      if(sh)sh.style.background=`radial-gradient(circle at ${(x+.5)*100}% ${(y+.5)*100}%,rgba(255,255,255,.09),transparent 65%)`;
+    });
+    card.addEventListener('mouseleave',()=>card.style.transform='');
+  });
+}
+
+// stagger observer
+function initStagger(){
+  document.querySelectorAll('.sk-stagger,.pj-stagger').forEach(el=>{
+    new IntersectionObserver(([en])=>{
+      if(en.isIntersecting){el.classList.add('rv-in');}
+    },{threshold:.08}).observe(el);
+  });
+}
+
+// magnetic CTA buttons
+function initMagnetic(){
+  document.querySelectorAll('.btn-gold').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{
+      const r=btn.getBoundingClientRect();
+      btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.22}px,${(e.clientY-r.top-r.height/2)*.22}px)`;
+    });
+    btn.addEventListener('mouseleave',()=>btn.style.transform='');
+  });
+}
+
+function initInteractive(){
+  initTypewriter();
+  initSkillBars();
+  initTilt();
+  initStagger();
+  initMagnetic();
+}
+
+
+// ═══ EVENTS ══════════════════════════════════════════════════
+function renderEvents() {
+  const el = document.getElementById('eventsEl'); if(!el) return;
+  const evs = D.events || [];
+  if(!evs.length) { el.innerHTML='<p style="color:var(--t3);text-align:center;padding:2.5rem">No events added yet.</p>'; return; }
+  el.innerHTML = evs.map(ev => `
+    <div class="event-card rv">
+      <div class="event-img">
+        ${ev.img ? `<img src="${ev.img}" alt="${ev.name}"/><div class="event-img-overlay"></div>` : '📅'}
+      </div>
+      <div class="event-body">
+        <div class="event-name">${ev.name}</div>
+        <div class="event-meta">
+          ${ev.date ? `<span class="event-date">📅 ${ev.date}</span>` : ''}
+          ${ev.loc  ? `<span class="event-loc">📍 ${ev.loc}</span>`  : ''}
+        </div>
+        ${ev.desc ? `<div class="event-desc">${ev.desc}</div>` : ''}
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('#eventsEl .rv').forEach(el => {
+    new IntersectionObserver(([en])=>{if(en.isIntersecting)el.classList.add('in');},{threshold:.1}).observe(el);
+  });
+  // apply section photo
+  const ph = document.getElementById('eventsSecPhoto');
+  if(ph) {
+    const img = (D.sectionBgs||{})['events'] || '';
+    ph.innerHTML = img ? `<div class="sec-photo"><img src="${img}" alt="Events banner"/><div class="sec-photo-ovl"></div></div>` : '';
+  }
+}
+
+function uploadEvImg(inp) {
+  const f=inp.files[0]; if(!f) return;
+  if(f.size>5*1024*1024){showToast('Max 5MB','err');return;}
+  const r=new FileReader();
+  r.onload=e=>{
+    document.getElementById('ev-img').value=e.target.result;
+    document.getElementById('evImgPreview').innerHTML=`<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover"/>`;
+  };
+  r.readAsDataURL(f);
+}
+function clearEvImg(){document.getElementById('ev-img').value='';document.getElementById('evImgPreview').innerHTML='📸';}
+
+function saveEvent() {
+  const eid = document.getElementById('ev-eid').value;
+  const obj = {
+    id: eid ? +eid : Date.now(),
+    name: document.getElementById('ev-name').value.trim(),
+    date: document.getElementById('ev-date').value.trim(),
+    loc:  document.getElementById('ev-loc').value.trim(),
+    desc: document.getElementById('ev-desc').value.trim(),
+    img:  document.getElementById('ev-img').value,
+  };
+  if(!obj.name){showToast('Event name required','err');return;}
+  if(!D.events) D.events=[];
+  if(eid){const i=D.events.findIndex(x=>x.id===+eid);if(i>-1)D.events[i]=obj;}
+  else D.events.push(obj);
+  saveData(eid?'Updated!':'Event added!');
+  cancelEvent(); renderTables(); renderEvents();
+}
+function editEvent(id) {
+  const ev=(D.events||[]).find(x=>x.id===id); if(!ev) return;
+  document.getElementById('ev-name').value=ev.name||'';
+  document.getElementById('ev-date').value=ev.date||'';
+  document.getElementById('ev-loc').value=ev.loc||'';
+  document.getElementById('ev-desc').value=ev.desc||'';
+  document.getElementById('ev-img').value=ev.img||'';
+  document.getElementById('evImgPreview').innerHTML=ev.img?`<img src="${ev.img}" style="width:100%;height:100%;object-fit:cover"/>`:'📸';
+  document.getElementById('ev-eid').value=ev.id;
+  document.getElementById('evFormTitle').textContent='Edit Event';
+}
+function cancelEvent() {
+  ['name','date','loc','desc','eid','img'].forEach(f=>document.getElementById('ev-'+f).value='');
+  document.getElementById('evImgPreview').innerHTML='📸';
+  document.getElementById('evFormTitle').textContent='Add Event';
+}
+function deleteEvent(id) {
+  if(!confirm('Delete this event?')) return;
+  D.events=(D.events||[]).filter(x=>x.id!==id);
+  saveData('Deleted'); renderTables(); renderEvents();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderAll();
+});
+</script>
+</body>
+</html>
