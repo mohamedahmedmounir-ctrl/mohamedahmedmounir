@@ -560,6 +560,33 @@ footer{border-top:1px solid var(--b1);padding:2rem 0}
 .event-desc{font-size:.82rem;color:var(--t2);line-height:1.7}
 @media(max-width:640px){.events-grid{grid-template-columns:1fr}.event-img{height:160px}}
 </style>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyBOFVolzWJB6Mp-kP5FcfE_zN1E_n81UGs",
+  authDomain: "portfolio-a6354.firebaseapp.com",
+  projectId: "portfolio-a6354",
+  storageBucket: "portfolio-a6354.firebasestorage.app",
+  messagingSenderId: "572404519284",
+  appId: "1:572404519284:web:36ca88df4f05cc75991c21"
+};
+const fbApp = initializeApp(firebaseConfig);
+const db = getFirestore(fbApp);
+const DOC = doc(db, 'portfolio', 'data');
+
+window._fbSave = async function(data) {
+  try { await setDoc(DOC, { payload: JSON.stringify(data) }); return true; }
+  catch(e) { console.error('Firebase save error:', e); return false; }
+};
+window._fbLoad = async function() {
+  try { const snap = await getDoc(DOC); if(snap.exists()) return JSON.parse(snap.data().payload); }
+  catch(e) { console.error('Firebase load error:', e); }
+  return null;
+};
+window._fbReady = true;
+document.dispatchEvent(new Event('fb-ready'));
+</script>
 </head>
 <body>
 
@@ -1414,12 +1441,64 @@ function loadData() {
   if(!D.accentColor) D.accentColor = '#e8b86d';
   if(!D.serifFont) D.serifFont = "'Playfair Display',Georgia,serif";
 }
+let _pendingSave = null;
+
+async function _doFirebaseSave(data, msg) {
+  if(window._fbSave) {
+    const ok = await window._fbSave(data);
+    if(!ok) showToast('Cloud save failed','err');
+  }
+  if(msg) showToast(msg);
+}
+
 function saveData(msg='Saved!') {
+  // always write locally first
   try { localStorage.setItem('pf_v4', JSON.stringify(D)); } catch { showToast('Storage full','err'); return; }
-  showToast(msg);
+  const snapshot = JSON.parse(JSON.stringify(D));
+  if(window._fbReady && window._fbSave) {
+    // Firebase ready — save immediately
+    _doFirebaseSave(snapshot, msg);
+  } else {
+    // Firebase not ready yet — queue it, show toast now
+    _pendingSave = { data: snapshot, msg };
+    if(msg) showToast(msg);
+  }
 }
 
 loadData();
+
+// sync latest data from Firebase after page loads
+async function syncFromFirebase() {
+  if(!window._fbLoad) return;
+  // CRITICAL: if we have a pending local save, flush it first — don't overwrite with old cloud data
+  if(_pendingSave) {
+    const toSave = _pendingSave;
+    _pendingSave = null;
+    D = toSave.data;
+    await _doFirebaseSave(toSave.data, toSave.msg);
+    return;
+  }
+  try {
+    const cloud = await window._fbLoad();
+    if(cloud) {
+      D = cloud;
+      if(!D.events) D.events = JSON.parse(JSON.stringify(DEF.events));
+      if(!D.p || !D.p.twPhrases) { if(D.p) D.p.twPhrases = JSON.parse(JSON.stringify(DEF.p.twPhrases)); }
+      if(!D.messages) D.messages = [];
+      if(!D.sectionBgs) D.sectionBgs = {};
+      if(!D.education) D.education = JSON.parse(JSON.stringify(DEF.education));
+      if(!D.volunteering) D.volunteering = JSON.parse(JSON.stringify(DEF.volunteering));
+      if(!D.secBgImages) D.secBgImages = {};
+      if(!D.secBgOpacities) D.secBgOpacities = {};
+      if(!D.accentColor) D.accentColor = '#e8b86d';
+      if(!D.serifFont) D.serifFont = "'Playfair Display',Georgia,serif";
+      localStorage.setItem('pf_v4', JSON.stringify(D));
+      renderAll();
+    }
+  } catch(e) { console.warn('Firebase sync failed, using local data', e); }
+}
+// fb-ready fires once when Firebase module is ready
+document.addEventListener('fb-ready', syncFromFirebase);
 
 // ═══════════════════════════════════
 // TOAST
