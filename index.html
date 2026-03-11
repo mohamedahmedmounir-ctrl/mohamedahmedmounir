@@ -1704,6 +1704,8 @@ async function syncFromFirebase() {
 }
 // fb-ready fires once when Firebase module is ready
 document.addEventListener('fb-ready', syncFromFirebase);
+// Fallback: if Firebase module already ran before this listener was registered, call sync immediately
+if (window._fbReady) syncFromFirebase();
 
 // ═══════════════════════════════════
 // TOAST
